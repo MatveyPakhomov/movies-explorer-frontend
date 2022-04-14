@@ -77,7 +77,7 @@
 }
 
 .infoTooltip__close-button {
-  background: no-repeat center / 150% url("../../images/popup-close-button.svg")
+  background: no-repeat center / 150% url("../images/popup-close-button.svg")
     transparent;
   width: 40px;
   height: 40px;
@@ -97,7 +97,7 @@
 
 @media screen and (max-width: 619px) {
   .infoTooltip__close-button {
-    background: no-repeat center / 100% url('../../images/popup-close-button.svg') transparent;
+    background: no-repeat center / 100% url('../images/popup-close-button.svg') transparent;
     top: -45px;
     right: -5px;
     width: 36px;

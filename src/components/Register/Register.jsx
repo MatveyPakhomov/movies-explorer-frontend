@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Register.css";
+import "./Register.css";
 import { Link } from "react-router-dom";
 
 export default function Register(props) {
@@ -53,7 +53,7 @@ export default function Register(props) {
         </button>
         <section className="register__signin-section">
           <p className="register__signin">Уже зарегистрированы?</p>
-          <Link to="/sign-in" className="register__login-link">
+          <Link to="/signin" className="register__login-link">
             Войти
           </Link>
         </section>

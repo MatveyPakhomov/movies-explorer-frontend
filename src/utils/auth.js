@@ -22,7 +22,7 @@ export const register = (email, password) => {
   }).then(checkResponse);
 };
 
-export const authorize = (email, password) => {
+export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     credentials: "include",
@@ -33,8 +33,8 @@ export const authorize = (email, password) => {
   }).then(checkResponse);
 };
 
-export const getContent = () => {
-  return fetch(`${BASE_URL}/users/me`, {
+export const getProfile = () => {
+  return fetch(`${BASE_URL}/profile`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -47,8 +47,8 @@ export const getContent = () => {
 };
 
 export const logout = () => {
-  return fetch(`${BASE_URL}/signin`, {
-    method: "GET",
+  return fetch(`${BASE_URL}/signout`, {
+    method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",

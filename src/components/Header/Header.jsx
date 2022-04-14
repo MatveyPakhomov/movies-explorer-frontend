@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import headerLogo from "../images/header-logo.svg";
+import headerLogo from "../../images/header-logo.svg";
 
-export default function Header({ userData, ...props }) {
+export default function Header({
+  userData,
+  onSignOut,
+}) {
 
   return (
     <header className="header page__header">
@@ -15,9 +18,9 @@ export default function Header({ userData, ...props }) {
         <section className="header__user-section">
           <p className="header__user-email">{userData.email}</p>
           <Link
-            to={`${userData.link || "/sign-up"}`}
+            to={`${userData.link || "/signup"}`}
             className="header__link"
-            onClick={props.onSignOut}
+            onClick={onSignOut}
           >
             {userData.title || "Регистрация"}
           </Link>

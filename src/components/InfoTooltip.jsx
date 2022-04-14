@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/InfoTooltip.css";
+import "./InfoTooltip.css"
 import failImage from "../images/fail.svg";
 import successImage from "../images/success.svg";
 

@@ -1,28 +1,25 @@
 import React from "react";
-import "../index.css";
-import Header from "../Header";
-import Main from "./Main";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import "../../index.css";
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
+import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import Result404 from "../Result404/Result404";
 import PopupWithForm from "../PopupWithForm";
 import ImagePopup from "../ImagePopup";
 import api from "../../utils/api";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import EditProfilePopup from "../EditProfilePopup";
-import EditAvatarPopup from "../EditAvatarPopup";
-import AddPlacePopup from "../AddPlacePopup";
 import { cardConfig } from "../../utils/utils";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
 import InfoTooltip from "../InfoTooltip";
 import ProtectedRoute from "../ProtectedRoute";
 import * as auth from "../../utils/auth";
 
 export default function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({});
@@ -44,22 +41,7 @@ export default function App() {
     }
   }, [loggedIn]);
 
-  function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true);
-  }
-
-  function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(true);
-  }
-
-  function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true);
-  }
-
   function closeAllPopups() {
-    setIsEditProfilePopupOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
     setSelectedCard(null);
     setIsInfoTooltipOpen(false);
     setInfoTooltipData({});
@@ -89,25 +71,25 @@ export default function App() {
     setSelectedCard(card);
   }
 
-  function handleUpdateUser(data) {
-    api
-      .setUserInfo(data)
-      .then((res) => {
-        setCurrentUser(res);
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err));
-  }
+  // function handleUpdateUser(data) { // возможно понадобится
+  //   api
+  //     .setUserInfo(data)
+  //     .then((res) => {
+  //       setCurrentUser(res);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
-  function handleUpdateAvatar(data) {
-    api
-      .setUserAvatar(data)
-      .then((res) => {
-        setCurrentUser(res);
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err));
-  }
+  // function handleUpdateAvatar(data) { // возможно понадобится
+  //   api
+  //     .setUserAvatar(data)
+  //     .then((res) => {
+  //       setCurrentUser(res);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   function handleCardLike(props) {
     const isLiked = props.likes.some((i) => i._id === currentUser._id);
@@ -137,19 +119,19 @@ export default function App() {
       .catch((err) => console.log(err));
   }
 
-  function handleAddPlaceSubmit(data) {
-    api
-      .addNewCard(data)
-      .then((newCard) => {
-        setCards(() => [cardConfig(newCard), ...cards]);
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err));
-  }
+  // function handleAddPlaceSubmit(data) { // возможно понадобится
+  //   api
+  //     .addNewCard(data)
+  //     .then((newCard) => {
+  //       setCards(() => [cardConfig(newCard), ...cards]);
+  //       closeAllPopups();
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   function handleLogin(email, password) {
     return auth
-      .authorize(email, password)
+      .login(email, password)
       .then((res) => {
         if (res) {
           setLoggedIn(true);
@@ -173,7 +155,7 @@ export default function App() {
         setInfoTooltipData({
           className: "success",
         });
-        navigate("/sign-in");
+        navigate("/signin");
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
@@ -186,14 +168,14 @@ export default function App() {
 
   function getAuthUserInfo() {
     auth
-      .getContent()
+      .getProfile()
       .then((res) => {
         setLoggedIn(true);
         navigate("/");
         setUserData({
           email: res.email,
           title: "Выйти",
-          link: "/sign-in",
+          link: "/signin",
         });
       })
       .catch((err) => console.log(err));
@@ -213,17 +195,17 @@ export default function App() {
     if (jwt) {
       auth.logout().then(() => {
         setLoggedIn(false);
-        navigate("/sign-in");
+        navigate("/signin");
         setUserData({
           title: "Регистрация",
-          link: "/sign-up",
+          link: "/signup",
         });
       });
     }
     // колхоз?
     setUserData({
       title: "Регистрация",
-      link: "/sign-up",
+      link: "/signup",
     });
   }
 
@@ -239,9 +221,6 @@ export default function App() {
                 <ProtectedRoute
                   component={Main}
                   loggedIn={loggedIn}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
                   onCardClick={handleCardClick}
                   onCardLike={handleCardLike}
                   onCardDelete={handleCardDelete}
@@ -249,33 +228,32 @@ export default function App() {
                 />
               }
             />
-            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
             <Route
-              path="/sign-up"
+              path="/movies"
+              element={<Movies />}
+            />
+            <Route
+              path="/saved-movies"
+              element={<SavedMovies />}
+            />
+            <Route
+              path="/profile"
+              element={<Profile />}
+            />
+            <Route
+              path="/signin"
+              element={<Login onLogin={handleLogin} />}
+              />
+            <Route
+              path="/signup"
               element={<Register onRegister={handleRegister} />}
             />
             <Route
               path="*"
-              element={!loggedIn ? <Navigate to="/sign-in" /> : "/"}
+              element={<Result404 />}
             />
           </Routes>
-
           <Footer />
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-          />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
           <PopupWithForm
             name="delete-place"
             containerName="popup__container_type_delete-place"

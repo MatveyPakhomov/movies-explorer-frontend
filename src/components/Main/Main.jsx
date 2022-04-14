@@ -1,6 +1,6 @@
 import React from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import profileAvatar from "../images/profile-Avatar.jpg";
+import profileAvatar from "../../images/profile-Avatar.jpg";
 import Card from "../MoviesCard/MoviesCard";
 
 export default function Main(props) {
