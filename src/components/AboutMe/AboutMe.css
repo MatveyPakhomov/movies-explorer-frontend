@@ -1,0 +1,223 @@
+.aboutMe {
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 110px 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutMe {
+    padding: 90px 50px 0;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutMe {
+    padding: 70px 18px 0;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__header-section {
+  max-width: 1140px;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  margin-bottom: 66px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutMe__header-section {
+    margin-bottom: 60px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__title {
+  color: #000;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.22;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-bottom: 23px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutMe__title {
+    font-size: 18px;
+    margin-bottom: 28px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__info-section {
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__info-section {
+    flex-direction: column-reverse;
+    align-items: center;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutMe__name {
+  color: #000;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-bottom: 18px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutMe__name {
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 16px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__name {
+    font-size: 30px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__job {
+  color: #000;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11;
+  margin: 0;
+  margin-bottom: 26px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutMe__job {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__job {
+    font-size: 11px;
+    line-height: 1.45;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__bio {
+  max-width: 600px;
+  color: #000;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.57;
+  margin: 0;
+  margin-bottom: 99px;
+  margin-right: 20px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutMe__bio {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 87px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__bio {
+    max-width: 292px;
+    font-size: 11px;
+    line-height: 1.45;
+    margin-bottom: 40px;
+    margin-right: 0;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__links {
+  display: flex;
+}
+
+.aboutMe__link {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+  margin-right: 20px;
+  transition: 0.2s all ease-out;
+}
+
+.aboutMe__link:last-child {
+  margin-right: 0;
+}
+
+.aboutMe__link:hover {
+  opacity: 0.7;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__link {
+    margin-right: 26px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutMe__avatar {
+  object-fit: cover;
+  border-radius: 10px;
+  width: 270px;
+  height: 327px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutMe__avatar {
+    width: 255px;
+    height: 307px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .aboutMe__avatar {
+    width: 292px;
+    height: 352px;
+    margin-bottom: 40px;
+    transition: 0.2s all ease-out;
+  }
+}

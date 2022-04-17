@@ -1,7 +1,8 @@
 import React from "react";
+import "./MoviesCard.css"
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-export default function Card(props) {
+export default function MoviesCard(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = props.ownerId === currentUser._id;

@@ -1,0 +1,80 @@
+.promo {
+  background-color: #f3c1f8;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 82px 19px 122px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .promo {
+    padding: 224px 19px 240px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .promo {
+    padding: 207px 10px 246px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.promo__logo {
+  background: center / contain no-repeat url("../../images/praktikum-logo.svg");
+  width: 320px;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .promo__logo {
+    width: 280px;
+    height: 280px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .promo__logo {
+    width: 248px;
+    height: 248px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.promo__title {
+  font-size: 50px;
+  font-weight: normal;
+  line-height: 1.16;
+  max-width: 730px;
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+  z-index: 1;
+  position: absolute;
+  letter-spacing: -0.04em;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .promo__title {
+    font-size: 36px;
+    line-height: 1.26;
+    max-width: 420px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .promo__title {
+    font-size: 31px;
+    line-height: 1.26;
+    max-width: 350px;
+    transition: 0.2s all ease-out;
+  }
+}

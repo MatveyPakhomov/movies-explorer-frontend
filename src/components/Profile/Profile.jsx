@@ -1,14 +1,37 @@
 import React from "react";
+import "./Profile.css";
 
-export default function Profile() {
-
+export default function Profile(props) {
   return (
-    <header className="header page__header">
-      <section className="header__section">
-        <section className="header__user-section">
-          <p className="header__user-email">PROFILE</p>
-        </section>
-      </section>
-    </header>
+    <section className="profile content__profile">
+      <button
+        type="button"
+        onClick={props}
+        aria-label="Кнопка: поменять аватар"
+        className="profile__avatar-edit-button"
+      >
+        <img
+          src={props}
+          alt="Картинка: портрет - Жак-Ив Кусто"
+          className="profile__avatar"
+        />
+      </button>
+      <div className="profile__info">
+        <h1 className="profile__title">{"Жак-Ив Кусто"}</h1>
+        <button
+          type="button"
+          onClick={props}
+          aria-label="Кнопка: редактировать"
+          className="profile__edit-button"
+        ></button>
+        <p className="profile__subtitle">{"Исследователь океана"}</p>
+      </div>
+      <button
+        type="button"
+        onClick={props}
+        aria-label="Кнопка: добавить место"
+        className="profile__add-button"
+      ></button>
+    </section>
   );
 }

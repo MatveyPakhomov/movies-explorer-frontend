@@ -1,0 +1,128 @@
+.card {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  background: white;
+  min-width: 282px;
+  min-height: 361px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+}
+
+.card__title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 80%;
+}
+
+.card__section {
+  width: 85%;
+  max-width: 246px;
+  min-height: calc(100% - 282px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__like-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* transition: opacity 0.2s ease-in-out; */
+}
+
+.card__like-section:hover {
+  opacity: 0.5;
+}
+
+.card__like-counter {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  font-size: 13px;
+  line-height: 1.23;
+}
+
+.card__like-button {
+  background: no-repeat url('../../images/element-like-button.svg') transparent;
+  width: 22px;
+  height: 19px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  margin-bottom: 2px;
+}
+
+.card__like-button:active {
+  background: no-repeat url('../../images/element-like-button-active.svg');
+}
+
+.card__like-button_active {
+  background: no-repeat url('../../images/element-like-button-active.svg');
+  width: 22px;
+  height: 19px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  margin-bottom: 2px;
+}
+
+.card__image {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  height: 282px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.card__delete-button_visible {
+  background: no-repeat url('../../images/element-delete-button.svg');
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
+.card__delete-button_visible:hover {
+  opacity: 0.6;
+}
+
+.card__delete-button_hidden {
+  background: no-repeat url('../../images/element-delete-button.svg');
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+}
