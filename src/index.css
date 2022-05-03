@@ -5,26 +5,3 @@
 /* стили для .page */
 @import url(./blocks/page/__login/page__login.css);
 @import url(./blocks/page/__register/page__register.css);
-
-/* стили для .popup */
-@import url(./blocks/popup/popup.css);
-@import url(./blocks/popup/_type/popup_type_image.css);
-@import url(./blocks/popup/_opened/popup_opened.css);
-@import url(./blocks/popup/__container/popup__container.css);
-@import url(./blocks/popup/__container/_type/_delete-place/popup__container_type_delete-place.css);
-@import url(./blocks/popup/__container/_type/_edit-avatar/popup__container_type_edit-avatar.css);
-@import url(./blocks/popup/__close-button/popup__close-button.css);
-@import url(./blocks/popup/__close-button/_image/popup__close-button_image.css);
-@import url(./blocks/popup/__title/popup__title.css);
-@import url(./blocks/popup/__form/popup__form.css);
-@import url(./blocks/popup/__section/popup__section.css);
-@import url(./blocks/popup/__input/popup__input.css);
-@import url(./blocks/popup/__input/_type/popup__input_type_error.css);
-@import url(./blocks/popup/__input-error/popup__input-error.css);
-@import url(./blocks/popup/__input-error/_active/popup__input-error_active.css);
-@import url(./blocks/popup/__submit-button/popup__submit-button.css);
-@import url(./blocks/popup/__submit-button/_inactive/popup__submit-button_inactive.css);
-@import url(./blocks/popup/__submit-button/_processing/popup__submit-button_processing.css);
-@import url(./blocks/popup/__caption/popup__caption.css);
-@import url(./blocks/popup/__image/popup__image.css);
-@import url(./blocks/popup/__image-field/popup__image-field.css);

@@ -10,11 +10,7 @@ export default function Profile(props) {
         aria-label="Кнопка: поменять аватар"
         className="profile__avatar-edit-button"
       >
-        <img
-          src={props}
-          alt="Картинка: портрет - Жак-Ив Кусто"
-          className="profile__avatar"
-        />
+        <p>СТРАНИЦА ПРОФИЛЯ, ПОКА ЧТО ПУСТАЯ</p>
       </button>
       <div className="profile__info">
         <h1 className="profile__title">{"Жак-Ив Кусто"}</h1>

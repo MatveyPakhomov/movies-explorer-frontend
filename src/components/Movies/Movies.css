@@ -1,6 +1,4 @@
-.cards {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 19px 0;
-  box-sizing: content-box;
-}
+  .movies {
+    width: 100%;
+    box-sizing: border-box;
+  }

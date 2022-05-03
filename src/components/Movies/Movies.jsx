@@ -1,14 +1,14 @@
 import React from "react";
+import "./Movies.css";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-export default function Movie() {
+export default function Movies() {
 
   return (
-    <header className="header page__header">
-      <section className="header__section">
-        <section className="header__user-section">
-          <p className="header__user-email">MOVIES</p>
-        </section>
-      </section>
-    </header>
+    <section className="movies">
+      <SearchForm />
+      <MoviesCardList />
+    </section>
   );
 }

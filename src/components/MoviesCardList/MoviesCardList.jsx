@@ -1,6 +1,6 @@
 import React from "react";
 import "./MoviesCardList.css";
-import MoviesCard from "../MoviesCard/MoviesCard";
+// import MoviesCard from "../MoviesCard/MoviesCard";
 
 export default function MoviesCardList(
   movies,
@@ -11,7 +11,7 @@ export default function MoviesCardList(
   return (
     <div className="cards">
       <ul className="cards__list">
-        {movies.map(({ key, ...options }) => (
+        {/* {movies.map(({ key, ...options }) => (
           <MoviesCard
             handleClick={onCardClick}
             onCardLike={onCardLike}
@@ -19,7 +19,7 @@ export default function MoviesCardList(
             key={key}
             {...options}
           />
-        ))}
+        ))} */}
       </ul>
     </div>
   );

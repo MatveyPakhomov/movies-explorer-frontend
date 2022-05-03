@@ -1,55 +1,91 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import headerLogo from "../../images/logo.svg";
 
-export default function Header(
-  linkTitle,
-  onMovies,
-  onSavedMovies,
+export default function Header({
+  onLogin,
   onProfile,
-  onLinksPopup,
-) {
+  onRegister,
+  onAbout,
+  onSavedMovies,
+  onNavigatePopup,
+}) {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const arr = ["/", "/movies", "/saved-movies", "/profile"];
+  const match = arr.includes(pathname, 0);
+  const [windowWidth, seWindowWidth] = useState(
+    window.matchMedia("(max-width: 950px)").matches
+  );
 
-  return (
-    <header className="header">
+  useEffect(() => {
+    window
+      .matchMedia("(max-width: 950px)")
+      .addEventListener("change", (e) => seWindowWidth(e.matches));
+  }, [windowWidth]);
+
+  const mainPage = location.pathname === "/";
+  let savedMoviesLink;
+
+  if (!mainPage) {
+    savedMoviesLink = (
+      <Link
+        to={"/saved-movies"}
+        className={"header__link_saved-movies"}
+        onClick={onSavedMovies}
+      >
+        {"Сохраненные Фильмы"}
+      </Link>
+    );
+  } else savedMoviesLink = null;
+  let headerRightButtons = (
+    <>
+      <section
+        className={
+          mainPage
+            ? "header__links-section"
+            : "header__links-section header__links-section_big-margin"
+        }
+      >
+        <Link
+          to={mainPage ? "/signup" : "/movies"}
+          className={
+            mainPage ? "header__link" : "header__link header__link_big-size"
+          }
+          onClick={onRegister}
+        >
+          {mainPage ? "Регистрация" : "Фильмы"}
+        </Link>
+        {savedMoviesLink}
+      </section>
+      <section className="header__profile-section">
+        <button
+          type="button"
+          onClick={mainPage ? onLogin : onProfile}
+          aria-label={mainPage ? "Кнопка Войти" : "Кнопка Аккаунт"}
+          className={
+            mainPage ? "header__link-button" : "header__link-button_grey"
+          }
+        >
+          {mainPage ? "Войти" : "Аккаунт"}
+        </button>
+      </section>
+    </>
+  );
+
+  if (!mainPage && windowWidth) {
+    headerRightButtons = <button className="header__burger-button" onClick={onNavigatePopup}></button>;
+  }
+
+  return match ? (
+    <header className={mainPage ? "header" : "header header-white"}>
       <section className="header__section">
-        <img
-          src={headerLogo}
-          alt="Логотип"
-          className="header__logo"
-        />
-        <section className="header__links-section">
-          {/* <button
-            type="button"
-            onClick={onLinksPopup}
-            aria-label="Кнопка бургер"
-            className="header__links-button"
-          /> */}
-          <Link
-            to={"/movies" || "/signup"}
-            className="header__link"
-            onClick={onMovies}
-          >
-            {"Регистрация" || "Фильмы"}
-          </Link>
-          {/* <Link
-            to={"/saved-movies" || "/signin"}
-            className="header__link header__login-button"
-            onClick={onSavedMovies}
-          >
-            {"Войти" || "Сохранённые фильмы"}
-          </Link> */}
-        </section>
-        <section className="header__profile-section">
-          <button
-            type="button"
-            onClick={onLinksPopup}
-            aria-label={"Кнопка Войти" || "Кнопка Аккаунт"}
-            className="header__link-button"
-          >{"Войти" || "Аккаунт"}</button>
-        </section>
+        <Link to={"/"} className="header__link header__logo" onClick={onAbout}>
+          <img src={headerLogo} alt="Логотип" className="header__logo" />
+        </Link>
+        {headerRightButtons}
       </section>
     </header>
-  );
+  ) : null;
 }
