@@ -11,7 +11,7 @@ export default function AboutMe() {
       <div className="aboutMe__info-section">
         <span className="aboutMe__info">
           <h3 className="aboutMe__name">Билл Килгор</h3>
-          <p className="aboutMe__job">Подполковник, 40 лет</p>
+          <p className="aboutMe__job">Подполковник, 50 лет</p>
           <p className="aboutMe__bio">
             Чувствуешь запах? Это напалм, сынок. Больше ничто в мире не пахнет
             так. Я люблю запах напалма поутру. Однажды мы бомбили одну высоту,

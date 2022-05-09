@@ -1,14 +1,16 @@
 import React from "react";
+import "./SavedMovies.css";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import movies from "../MoviesCardList/MoviesCardList";
 
-export default function SavedMovies() {
-
+export default function SavedMovies(onCardLike) {
   return (
-    <header className="header page__header">
-      <section className="header__section">
-        <section className="header__user-section">
-          <p className="header__user-email">SAVED MOVIES</p>
-        </section>
-      </section>
-    </header>
+    <section className="moviesCardList">
+      <ul className="moviesCardList__list">
+        {movies.map(({ key, isLiked, ...options }) => (
+          <MoviesCard onCardLike={onCardLike} key={key} {...options} />
+        ))}
+      </ul>
+    </section>
   );
 }

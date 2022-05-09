@@ -111,6 +111,11 @@
   }
 }
 
+.searchForm__submit-button:hover {
+  opacity: 0.8;
+  transition: 0.2s all ease-out;
+}
+
 .searchForm__slider-section {
   display: flex;
   align-items: center;
