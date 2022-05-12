@@ -1,10 +1,15 @@
 import React from "react";
 import "./Footer.css";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const arr = ["/", "/movies", "/saved-movies"];
+  const match = arr.includes(pathname, 0);
   const currentYear = new Date().getFullYear();
 
-  return (
+  return match ? (
     <footer className="footer">
       <div className="footer__section">
         <p className="footer__title">
@@ -26,5 +31,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  ) : null;
 }

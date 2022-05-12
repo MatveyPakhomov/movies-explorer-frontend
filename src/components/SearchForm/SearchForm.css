@@ -121,7 +121,7 @@
   align-items: center;
 }
 
-.searchForm__slider-button_on {
+.searchForm__slider-button_active {
   background: no-repeat url("../../images/slider-on.svg");
   background-color: inherit;
   width: 36px;
@@ -132,8 +132,8 @@
   margin-right: 12px;
 }
 
-.searchForm__slider-button_off {
-  background: no-repeat url("../../images/slider-on.svg");
+.searchForm__slider-button {
+  background: no-repeat url("../../images/slider-off.svg");
   background-color: inherit;
   width: 36px;
   height: 20px;

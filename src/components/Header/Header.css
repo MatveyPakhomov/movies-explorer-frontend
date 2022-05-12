@@ -94,7 +94,7 @@
   transition: 0.2s all ease-out;
 }
 
-.header__link_saved-movies {
+.header__link_saved-movies:hover {
   opacity: 0.8;
   transition: 0.2s all ease-out;
 }

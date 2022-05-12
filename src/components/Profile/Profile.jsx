@@ -4,30 +4,52 @@ import "./Profile.css";
 export default function Profile(props) {
   return (
     <section className="profile content__profile">
-      <button
-        type="button"
-        onClick={props}
-        aria-label="Кнопка: поменять аватар"
-        className="profile__avatar-edit-button"
-      >
-        <p>СТРАНИЦА ПРОФИЛЯ, ПОКА ЧТО ПУСТАЯ</p>
-      </button>
-      <div className="profile__info">
-        <h1 className="profile__title">{"Жак-Ив Кусто"}</h1>
+      <h1 className="profile__title">Привет, Виталий!</h1>
+      <form className="register__form" onSubmit={props.handleSubmit}>
+        <input
+          required
+          id="name"
+          name="name"
+          type="text"
+          value={profile.name}
+          className="register__input"
+          placeholder="Имя"
+          onChange={props.handleChange}
+        />
+        <input
+          required
+          id="email"
+          name="email"
+          type="email"
+          value={profile.email}
+          className="register__input"
+          placeholder="E-mail"
+          onChange={props.handleChange}
+        />
+      </form>
+      <div className="profile__buttons-section">
         <button
           type="button"
           onClick={props}
           aria-label="Кнопка: редактировать"
           className="profile__edit-button"
-        ></button>
-        <p className="profile__subtitle">{"Исследователь океана"}</p>
+        >
+          Редактировать
+        </button>
+        <button
+          type="button"
+          onClick={props}
+          aria-label="Кнопка: выйти из аккаунта"
+          className="profile__logout-button"
+        >
+          Выйти из аккаунта
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={props}
-        aria-label="Кнопка: добавить место"
-        className="profile__add-button"
-      ></button>
     </section>
   );
 }
+
+const profile = {
+  name: "Виталий",
+  email: "pochta@yandex.ru",
+};

@@ -2,7 +2,7 @@ import React from "react";
 import "./SearchForm.css";
 import searchImage from "../../images/search.svg";
 
-export default function SearchForm(onSubmit) {
+export default function SearchForm(onSubmit, handleSlider) {
   const [state, setState] = React.useState({
     movie: "",
   });
@@ -42,7 +42,11 @@ export default function SearchForm(onSubmit) {
         </div>
       </form>
       <div className="searchForm__slider-section">
-        <button type="button" className="searchForm__slider-button_on"></button>
+        <button
+          type="button"
+          className="searchForm__slider-button"
+          onClick={handleSlider}
+        ></button>
         <p className="searchForm__slider-title">Короткометражки</p>
       </div>
     </section>
