@@ -10,6 +10,7 @@ export default function NavigateHeaderPopup({
   onClose,
   isOpen,
 }) {
+
   return (
     <section
       className={`navigateHeaderPopup ${isOpen ? "popup_opened" : ""}`}

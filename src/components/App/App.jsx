@@ -58,6 +58,7 @@ export default function App() {
         <NavigateHeaderPopup
           isOpen={isNavigateHeaderPopupOpen}
           onClose={closePopup}
+          onProfile={handleProfileClick}
         />
       </div>
     </CurrentUserContext.Provider>

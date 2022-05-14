@@ -14,17 +14,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   box-sizing: border-box;
 }
-
-/* .app__header {
-  margin: 0 auto 38px;
-  border-bottom: 1px solid #545454B2;
-}
-
-@media screen and (max-width: 619px) {
-  .app__header {
-    margin-bottom: 40px;
-  }
-} */
