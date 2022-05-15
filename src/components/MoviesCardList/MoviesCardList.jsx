@@ -28,7 +28,7 @@ export default function MoviesCardList(onCardLike, handlMoreMoviesClick) {
 
 export const movies = [
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",
@@ -42,7 +42,7 @@ export const movies = [
     key: 2,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",
@@ -56,7 +56,7 @@ export const movies = [
     key: 4,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",
@@ -70,7 +70,7 @@ export const movies = [
     key: 6,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",
@@ -84,7 +84,7 @@ export const movies = [
     key: 8,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 2м",
@@ -98,7 +98,7 @@ export const movies = [
     key: 10,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",
@@ -119,7 +119,7 @@ export const movies = [
     key: 13,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 2м",
@@ -133,7 +133,7 @@ export const movies = [
     key: 15,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",
     isLiked: true,
     duration: "1ч 42м",

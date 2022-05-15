@@ -1,126 +1,229 @@
 .register {
-  font-family: "Inter", "Arial", sans-serif;
-  color: white;
+  background-color: #fff;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 358px;
-  min-width: 320px;
-}
-
-.register__section {
-  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-width: 260px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 70px 30px 30px;
+  transition: 0.2s all ease-out;
 }
 
-@media screen and (max-width: 619px) {
-  .register__section {
-    padding: 0 30px;
+@media screen and (max-width: 450px) {
+  .register {
+    justify-content: normal;
+    padding: 56px 30px 30px;
+    transition: 0.2s all ease-out;
   }
 }
 
-.register__title {
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 1.2;
-  margin: 20px 0 50px;
-  padding: 0;
+.register__section {
+  max-width: 396px;
   width: 100%;
-  height: 100%;
-  text-align: center;
+  transition: 0.2s all ease-out;
 }
 
-@media screen and (max-width: 619px) {
-  .register__title {
-    font-size: 20px;
-    margin: 0 0 40px;
+@media screen and (max-width: 450px) {
+  .register__section {
+    max-width: 260px;
+    transition: 0.2s all ease-out;
   }
 }
 
 .register__form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  align-items: flex-start;
+  justify-content: space-around;
+  transition: 0.2s all ease-out;
 }
 
-.register__input {
-  color: white;
-  padding: 0;
+/* top/input/bottom styles (куда их закинуть?)*/
+.top__section {
+  max-width: 396px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  transition: 0.2s all ease-out;
+  margin-bottom: 40px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .top__section {
+    max-width: 260px;
+    align-items: center;
+    margin-bottom: 80px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.top__link {
+  text-decoration: none;
+  transition: 0.2s all ease-out;
+}
+
+.top__link:hover {
+  opacity: 0.8;
+  transition: 0.2s all ease-out;
+}
+
+.top__logo {
+  margin-bottom: 40px;
+}
+
+.top__title {
+  color: #000;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0;
+  transition: 0.2s all ease-out;
+}
+
+.input__section {
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input__label {
+  color: #a0a0a0;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.input {
+  width: 100%;
+  color: #000;
+  padding: 0 2px;
   font-size: 14px;
+  font-weight: normal;
   line-height: 1.21;
   border: none;
-  min-height: 27px;
-  height: 100%;
-  border-bottom: 2px solid white;
-  background-color: black;
-  width: 100%;
-  margin-bottom: 30px;
+  min-height: 32px;
+  border-bottom: 1px solid #e8e8e8;
   box-sizing: border-box;
 }
 
-.register__input:last-of-type {
-  margin-bottom: 216px;
+.input:focus {
+  border-bottom: 1px solid #000;
 }
 
-@media screen and (max-width: 619px) {
-  .register__input:last-of-type {
-    margin-bottom: 173px;
-  }
+.input__error {
+  color: #ff4062;
 }
 
-.register__submit-button {
-  font-size: 18px;
-  line-height: 1.22;
-  background-color: white;
+.input__error-label {
+  color: #ff4062;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  /* opacity: 0; */
+  transition: 0.2s all ease-out;
+}
+
+.input__error-label:last-child {
+  margin-bottom: 0;
+}
+
+.input__error-label_active {
+  opacity: 1;
+  transition: 0.2s all ease-out;
+}
+
+.bottom__container {
+  max-width: 396px;
   width: 100%;
-  min-height: 50px;
-  color: black;
-  border: none;
-  margin: 0 auto;
-  padding: 0;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
-  margin-bottom: 15px;
+  transition: 0.2s all ease-out;
 }
 
-.register__submit-button:hover {
-  opacity: 0.8;
-}
-
-@media screen and (max-width: 619px) {
-  .register__submit-button {
-    font-size: 16px;
-    line-height: 1.18;
-    min-height: 46px;
-    margin-bottom: 20px;
+@media screen and (max-width: 450px) {
+  .bottom__container {
+    max-width: 260px;
+    margin-top: auto;
+    transition: 0.2s all ease-out;
   }
 }
 
-.register__signin-section {
+.bottom__submit-button {
+  width: 100%;
+  height: 45px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .bottom__submit-button {
+    font-size: 12px;
+    line-height: 1.25;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.bottom__submit-button:hover {
+  opacity: 0.8;
+  transition: 0.2s all ease-out;
+}
+
+.bottom__section {
   display: flex;
   justify-content: center;
 }
 
-.register__signin {
+.bottom__title {
+  color: #a0a0a0;
+  font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
   margin: 0;
   padding: 0;
-  margin-right: 5px;
+  margin-right: 6px;
+  transition: 0.2s all ease-out;
 }
 
-.register__login-link {
+@media screen and (max-width: 450px) {
+  .bottom__title {
+    font-size: 12px;
+    line-height: 1.25;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.bottom__link {
+  color: #000;
+  font-weight: normal;
   font-size: 14px;
   line-height: 1.21;
-  color: white;
   text-decoration: none;
-  transition: opacity 0.2s ease-in-out;
+  transition: 0.2s all ease-out;
 }
 
-.register__login-link:hover {
+@media screen and (max-width: 450px) {
+  .bottom__link {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
+
+.bottom__link:hover {
   opacity: 0.8;
 }

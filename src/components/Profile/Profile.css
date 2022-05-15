@@ -1,14 +1,13 @@
 .profile {
-  align-items: center;
   background-color: #fff;
   width: 100%;
   height: calc(100vh - 80px); /* минус хедер */
   box-sizing: border-box;
-  transition: 0.2s all ease-out;
   display: flex;
-  justify-content: space-around;
   flex-direction: column;
-  padding: 0 30px;
+  align-items: center;
+  padding: 70px 30px 40px;
+  transition: 0.2s all ease-out;
 }
 
 .profile__section {
@@ -94,6 +93,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: auto;
 }
 
 .profile__button {

@@ -10,12 +10,12 @@ import Profile from "../Profile/Profile";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import NavigateHeaderPopup from "../NavigateHeaderPopup/NavigateHeaderPopup";
+import Navigation from "../Navigation/Navigation";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 
 export default function App() {
-  const [isNavigateHeaderPopupOpen, setIsNavigateHeaderPopupOpen] =
+  const [isNavigationOpen, setIsNavigationOpen] =
     React.useState(false);
   const [currentUser] = React.useState({});
   const navigate = useNavigate();
@@ -28,12 +28,12 @@ export default function App() {
     navigate("/profile");
   }
 
-  function handleNavigateHeaderPopupClick() {
-    setIsNavigateHeaderPopupOpen(true);
+  function handleNavigationClick() {
+    setIsNavigationOpen(true);
   }
 
   function closePopup() {
-    setIsNavigateHeaderPopupOpen(false);
+    setIsNavigationOpen(false);
   }
 
   return (
@@ -42,7 +42,7 @@ export default function App() {
         <Header
           onLogin={handleLoginClick}
           onProfile={handleProfileClick}
-          onNavigatePopup={handleNavigateHeaderPopupClick}
+          onNavigationPopup={handleNavigationClick}
           onClose={closePopup}
         />
         <Routes>
@@ -55,8 +55,8 @@ export default function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
-        <NavigateHeaderPopup
-          isOpen={isNavigateHeaderPopupOpen}
+        <Navigation
+          isOpen={isNavigationOpen}
           onClose={closePopup}
           onProfile={handleProfileClick}
         />

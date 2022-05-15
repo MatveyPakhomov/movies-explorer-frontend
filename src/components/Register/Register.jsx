@@ -1,64 +1,146 @@
 import React from "react";
 import "./Register.css";
+import "../Header/Header.css";
 import { Link } from "react-router-dom";
+import headerLogo from "../../images/logo.svg";
 
-export default function Register(props) {
-  const [state, setState] = React.useState({
-    email: "",
-    password: "",
-  });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    // сюда добавим логику обработки формы регистрации
-    const { email, password } = state;
-    props.onRegister(email, password);
-  }
-
+function renderTop(props) {
   return (
-    <div className="register page__register">
-      <section className="register__section">
-      <h2 className="register__title">Регистрация</h2>
-      <form className="register__form" onSubmit={handleSubmit}>
-        <input
-          required
-          id="email"
-          name="email"
-          type="email"
-          value={state.email}
-          className="register__input"
-          placeholder="Email"
-          onChange={handleChange}
+    <div className={`${props.component}__top-section top__section`}>
+      <Link
+        to={"/"}
+        className={`${props.component}__link top__link"`}
+        onClick={props.onAbout}
+      >
+        <img
+          src={props.headerLogo}
+          alt="Логотип"
+          className={`${props.component}__logo top__logo`}
         />
-        <input
-          required
-          id="password"
-          name="password"
-          type="password"
-          value={state.password}
-          className="register__input"
-          placeholder="Пароль"
-          onChange={handleChange}
-        />
-        <button type="submit" className="register__submit-button">
-          Зарегистрироваться
-        </button>
-        <section className="register__signin-section">
-          <p className="register__signin">Уже зарегистрированы?</p>
-          <Link to="/signin" className="register__login-link">
-            Войти
-          </Link>
-        </section>
-      </form>
+      </Link>
+      <h2 className={`${props.component}__title top__title`}>{props.title}</h2>
+    </div>
+  );
+}
+
+function renderInput(props) {
+  return (
+    <section className={`${props.component}__input-section input__section`}>
+      <label
+        htmlFor={props.for}
+        className={`${props.component}__input-label input__label`}
+      >
+        {props.label}
+      </label>
+      <input
+        required
+        id={props.id}
+        name={props.name}
+        type={props.type}
+        defaultValue={props.value}
+        className={`${props.component}__input input`}
+        onChange={props.handleChange}
+      />
+      <span
+        id={`${props.component}-name-error`}
+        className={`${props.component}__input_error input__error-label`}
+      >
+        Какие то проблемы, мистер?
+      </span>
+    </section>
+  );
+}
+
+function renderBottom(props) {
+  return (
+    <div className={`${props.component}__bottom-section bottom__container`}>
+      <button
+        type="submit"
+        className={`${props.component}__submit-button bottom__submit-button`}
+      >
+        {props.submitButton}
+      </button>
+      <section
+        className={`${props.component}__${props.action}-section bottom__section`}
+      >
+        <p
+          className={`${props.component}__${props.action}-title bottom__title`}
+        >
+          {props.actionTitle}
+        </p>
+        <Link
+          to={props.component === "register" ? "/signin" : "/signup"}
+          className={`${props.component}__${props.action}-link bottom__link`}
+        >
+          {props.actionButton}
+        </Link>
       </section>
     </div>
   );
 }
+
+export default function Register(onAbout, handleChange) {
+  const registerTop = {
+    component: "register",
+    headerLogo: headerLogo,
+    onAbout: onAbout,
+    title: "Добро пожаловать!",
+  };
+
+  const emailInput = {
+    for: "email",
+    component: "register",
+    label: "E-mail",
+    id: "email",
+    name: "email",
+    type: "email",
+    value: "pochta@yandex.ru",
+    handleChange: handleChange,
+  };
+
+  const nameInput = {
+    for: "name",
+    component: "register",
+    label: "Имя",
+    id: "name",
+    name: "name",
+    type: "text",
+    value: "Виталий",
+    handleChange: handleChange,
+  };
+
+  const passwordInput = {
+    for: "password",
+    component: "register",
+    label: "Пароль",
+    id: "password",
+    name: "password",
+    type: "password",
+    value: "verystrongpassword",
+    handleChange: handleChange,
+  };
+
+  const registerBottom = {
+    component: "register",
+    submitButton: "Зарегистрироваться",
+    action: "login",
+    actionTitle: "Уже зарегистрированы?",
+    actionButton: "Войти",
+  };
+
+  return (
+    <section className="register">
+      <div className="register__section">
+        {renderTop(registerTop)}
+        <form className="register__form">
+          {renderInput(nameInput)}
+          {renderInput(emailInput)}
+          {renderInput(passwordInput)}
+        </form>
+      </div>
+      {renderBottom(registerBottom)}
+    </section>
+  );
+}
+
+export { renderTop, renderInput, renderBottom };

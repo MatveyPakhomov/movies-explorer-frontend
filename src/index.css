@@ -1,7 +1,3 @@
 /* стили вендоров */
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts.css);
-
-/* стили для .page */
-@import url(./blocks/page/__login/page__login.css);
-@import url(./blocks/page/__register/page__register.css);

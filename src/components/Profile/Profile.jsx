@@ -57,7 +57,7 @@ export default function Profile(props) {
   );
 }
 
-const profile = {
+export const profile = {
   name: "Виталий",
   email: "pochta@yandex.ru",
 };

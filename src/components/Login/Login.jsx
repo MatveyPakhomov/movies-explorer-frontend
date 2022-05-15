@@ -1,57 +1,57 @@
 import React from "react";
 import "./Login.css";
+import "../Register/Register.css";
+import headerLogo from "../../images/logo.svg";
+import { renderTop, renderInput, renderBottom } from "../Register/Register";
 
-export default function Login(props) {
-  const [state, setState] = React.useState({
-    email: "",
-    password: "",
-  });
+export default function Login(onAbout, handleChange, onLogin, onRegister) {
+  const loginTop = {
+    component: "login",
+    headerLogo: headerLogo,
+    onAbout: onAbout,
+    title: "Рады видеть!",
+  };
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+  const emailInput = {
+    for: "email",
+    component: "login",
+    label: "E-mail",
+    id: "email",
+    name: "email",
+    type: "email",
+    value: "pochta@yandex.ru",
+    handleChange: handleChange,
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    // сюда добавим логику обработки формы регистрации
-    const { email, password } = state;
-    props.onLogin(email, password);
-  }
+  const passwordInput = {
+    for: "password",
+    component: "login",
+    label: "Пароль",
+    id: "password",
+    name: "password",
+    type: "password",
+    value: "verystrongpassword",
+    handleChange: handleChange,
+  };
+
+  const loginBottom = {
+    component: "login",
+    submitButton: "Войти",
+    action: "register",
+    actionTitle: "Ещё не зарегистрированы?",
+    actionButton: "Регистрация",
+  };
 
   return (
-    <div className="login page__login">
-      <section className="login__section">
-        <h2 className="login__title">Вход</h2>
-        <form className="login__form" onSubmit={handleSubmit}>
-          <input
-            required
-            id="email"
-            name="email"
-            type="email"
-            value={state.email}
-            className="login__input"
-            placeholder="Email"
-            onChange={handleChange}
-          />
-          <input
-            required
-            id="password"
-            name="password"
-            type="password"
-            value={state.password}
-            className="login__input"
-            placeholder="Password"
-            onChange={handleChange}
-          />
-          <button type="submit" className="login__submit-button">
-            Войти
-          </button>
+    <section className="login">
+      <div className="login__section">
+        {renderTop(loginTop)}
+        <form className="login__form">
+          {renderInput(emailInput)}
+          {renderInput(passwordInput)}
         </form>
-      </section>
-    </div>
+      </div>
+      {renderBottom(loginBottom)}
+    </section>
   );
 }
