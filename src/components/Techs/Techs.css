@@ -18,6 +18,7 @@
 
 @media screen and (max-width: 450px) {
   .techs {
+    background-color: #FFF;
     padding: 70px 18px;
     transition: 0.2s all ease-out;
   }

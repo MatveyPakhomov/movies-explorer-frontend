@@ -35,7 +35,7 @@ export const movies = [
     key: 1,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -49,7 +49,7 @@ export const movies = [
     key: 3,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -63,7 +63,7 @@ export const movies = [
     key: 5,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -77,7 +77,7 @@ export const movies = [
     key: 7,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -91,7 +91,7 @@ export const movies = [
     key: 9,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -105,14 +105,14 @@ export const movies = [
     key: 11,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
     key: 12,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",
@@ -126,7 +126,7 @@ export const movies = [
     key: 14,
   },
   {
-    url: "https://www.penbaypilot.com/sites/default/files/2020/03/field/image/MaineMovies200+previewsm.png",
+    url: "https://external-preview.redd.it/jPy0m52jpUMZNMseez1ASs2V-O94N_zX4LD8HLggd-U.jpg?width=640&crop=smart&auto=webp&s=05435e533aa66e370ee43f24390f693998c4d6a8",
     title: "33 слова о дизайне",
     isLiked: false,
     duration: "1ч 42м",

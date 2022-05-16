@@ -10,7 +10,7 @@ export default function Movies() {
   const pathname = location.pathname;
   return (
     <section className="movies">
-      <SearchForm /> :
+      <SearchForm />
       {pathname === "/saved-movies" ? <SavedMovies /> : <MoviesCardList />}
     </section>
   );

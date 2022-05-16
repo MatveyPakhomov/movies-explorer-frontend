@@ -15,8 +15,7 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 
 export default function App() {
-  const [isNavigationOpen, setIsNavigationOpen] =
-    React.useState(false);
+  const [isNavigationOpen, setIsNavigationOpen] = React.useState(false);
   const [currentUser] = React.useState({});
   const navigate = useNavigate();
 
@@ -42,7 +41,7 @@ export default function App() {
         <Header
           onLogin={handleLoginClick}
           onProfile={handleProfileClick}
-          onNavigationPopup={handleNavigationClick}
+          onNavigation={handleNavigationClick}
           onClose={closePopup}
         />
         <Routes>

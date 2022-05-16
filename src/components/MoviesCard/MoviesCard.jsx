@@ -20,7 +20,7 @@ export default function MoviesCard(props) {
         className="moviesCard__image"
         onClick={handleClick}
         src={props.url}
-        alt={props.alt}
+        alt={props.title}
       />
       <div className="moviesCard__section">
         <h2 className="moviesCard__title">{props.title}</h2>

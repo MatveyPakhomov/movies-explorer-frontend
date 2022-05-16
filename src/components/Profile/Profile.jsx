@@ -17,7 +17,7 @@ export default function Profile(props) {
             type="text"
             defaultValue={profile.name}
             className="profile__input"
-            // placeholder="Имя"
+            placeholder="Имя"
           />
         </form>
         <form className="profile__input-section">
@@ -31,7 +31,7 @@ export default function Profile(props) {
             type="email"
             defaultValue={profile.email}
             className="profile__input"
-            // placeholder="E-mail"
+            placeholder="E-mail"
           />
         </form>
       </div>

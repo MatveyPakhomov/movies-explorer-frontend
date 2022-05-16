@@ -8,7 +8,14 @@ export default function Portfolio() {
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__links">
         <li className="portfolio__link">
-          <a href="http://#" className="portfolio__link-name">Статичный сайт</a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://matveypakhomov.github.io/how-to-learn/index.html"
+            className="portfolio__link-name"
+          >
+            Статичный сайт
+          </a>
           <img
             className="portfolio__link-img"
             src={linkArrow}
@@ -16,7 +23,14 @@ export default function Portfolio() {
           />
         </li>
         <li className="portfolio__link">
-          <a href="http://#" className="portfolio__link-name">Адаптивный сайт</a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://MatveyPakhomov.github.io/russian-travel/index.html"
+            className="portfolio__link-name"
+          >
+            Адаптивный сайт
+          </a>
           <img
             className="portfolio__link-img"
             src={linkArrow}
@@ -24,7 +38,14 @@ export default function Portfolio() {
           />
         </li>
         <li className="portfolio__link">
-          <a href="http://#" className="portfolio__link-name">Одностраничное приложение</a>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://matveypakhomov.github.io/mesto/"
+            className="portfolio__link-name"
+          >
+            Одностраничное приложение
+          </a>
           <img
             className="portfolio__link-img"
             src={linkArrow}

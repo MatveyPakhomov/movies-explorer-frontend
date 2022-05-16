@@ -2,10 +2,11 @@ import React from "react";
 import "./SearchForm.css";
 import searchImage from "../../images/search.svg";
 
-export default function SearchForm(onSubmit, handleSlider) {
+export default function SearchForm(onSubmit) {
   const [state, setState] = React.useState({
     movie: "",
   });
+  const [isSliderOn, setIsSliderOn] = React.useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -14,6 +15,11 @@ export default function SearchForm(onSubmit, handleSlider) {
       [name]: value,
     }));
   }
+
+  function handleSliderClick() {
+    isSliderOn ? setIsSliderOn(false) : setIsSliderOn(true);
+  }
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +41,7 @@ export default function SearchForm(onSubmit, handleSlider) {
             className="searchForm__input"
             placeholder="Фильм"
             onChange={handleChange}
+            required
           />
           <button type="submit" className="searchForm__submit-button">
             Найти
@@ -44,8 +51,8 @@ export default function SearchForm(onSubmit, handleSlider) {
       <div className="searchForm__slider-section">
         <button
           type="button"
-          className="searchForm__slider-button"
-          onClick={handleSlider}
+          className={isSliderOn ? "searchForm__slider-button_active" : "searchForm__slider-button"}
+          onClick={handleSliderClick}
         ></button>
         <p className="searchForm__slider-title">Короткометражки</p>
       </div>

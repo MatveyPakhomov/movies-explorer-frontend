@@ -9,7 +9,7 @@ export default function Header({
   onRegister,
   onAbout,
   onSavedMovies,
-  onNavigatePopup,
+  onNavigation,
 }) {
   const location = useLocation();
   const pathname = location.pathname;
@@ -75,7 +75,7 @@ export default function Header({
   );
 
   if (!mainPage && windowWidth) {
-    headerRightButtons = <button className="header__burger-button" onClick={onNavigatePopup}></button>;
+    headerRightButtons = <button className="header__burger-button" onClick={onNavigation}></button>;
   }
 
   return match ? (
