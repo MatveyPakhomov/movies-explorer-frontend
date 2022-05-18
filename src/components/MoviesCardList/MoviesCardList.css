@@ -1,0 +1,112 @@
+.moviesCardList {
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 70px 70px 10px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .moviesCardList {
+    padding: 70px 30px 10px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList {
+    padding: 40px 10px 10px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.moviesCardList__list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 270px);
+  justify-content: center;
+  gap: 38px 20px;
+  max-width: 1140px;
+}
+
+@media screen and (max-width: 950px) {
+  .moviesCardList__list {
+    grid-template-columns: repeat(auto-fill, 339px);
+    gap: 30px 30px;
+    max-width: 708px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList__list {
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 34px 0;
+    max-width: 300px;
+  }
+}
+
+.moviesCardList__moreMovies-button-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: 50px 70px 80px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .moviesCardList__moreMovies-button-section {
+    padding: 50px 30px 80px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList__moreMovies-button-section {
+    padding: 50px 10px 80px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.moviesCardList__moreMovies-button {
+  max-width: 1140px;
+  background: no-repeat url("../../images/grey-rectangle-button.svg");
+  border-radius: 6px;
+  width: 100%;
+  height: 36px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  display: block;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .moviesCardList__moreMovies-button {
+    max-width: 708px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList__moreMovies-button {
+    max-width: 300px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.moviesCardList__moreMovies-button:hover {
+  opacity: 0.8;
+  transition: 0.2s all ease-out;
+}

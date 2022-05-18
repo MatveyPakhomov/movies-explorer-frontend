@@ -1,0 +1,238 @@
+.aboutProject {
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 110px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutProject {
+    padding: 90px 50px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject {
+    padding: 70px 18px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__anhor {
+  display: hidden;
+}
+
+.aboutProject__section {
+  max-width: 1140px;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  margin-bottom: 70px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__section {
+    margin-bottom: 60px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__title {
+  color: #000;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 1.22;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-bottom: 23px;
+}
+
+.aboutProject__info-section {
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 110px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__info-section {
+    max-width: 284px;
+    flex-direction: column;
+    margin-bottom: 60px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__info {
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__info:first-child {
+    margin-bottom: 56px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__info:last-child {
+  margin-left: 50px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutProject__info:last-child {
+    margin-left: 30px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__info:last-child {
+    margin-left: 0;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__info-title {
+  color: #000;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-bottom: 26px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__info-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__info-text {
+  color: #000;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.43;
+  margin: 0;
+}
+
+@media screen and (max-width: 950px) {
+  .aboutProject__info-text {
+    font-size: 12px;
+    line-height: 1.5;
+    transition: 0.2s all ease-out;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__info-text {
+    font-size: 11px;
+    line-height: 1.45;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__infographic-section {
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+}
+
+.aboutProject__infographic-backend {
+  width: 20%;
+  text-align: center;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .aboutProject__infographic-backend {
+    width: 30%;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__infographic-frontend {
+  width: 80%;
+  text-align: center;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 740px) {
+  .aboutProject__infographic-frontend {
+    width: 70%;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__infographic {
+  height: 36px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 14px;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__infographic {
+    margin-bottom: 10px;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__backend-colorizer {
+  color: #fff;
+  background-color: #000;
+}
+
+.aboutProject__frontend-colorizer {
+  color: #000;
+  background-color: #f2f2f2;
+}
+
+.aboutProject__infographic-title {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  margin: 0;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__infographic-title {
+    font-size: 11px;
+    line-height: 1.18;
+    transition: 0.2s all ease-out;
+  }
+}
+
+.aboutProject__infographic-subtitle {
+  color: #a0a0a0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+  margin: 0;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject__infographic-subtitle {
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 1.18;
+    transition: 0.2s all ease-out;
+  }
+}
