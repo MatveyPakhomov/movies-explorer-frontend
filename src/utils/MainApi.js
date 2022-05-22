@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
   constructor(config) {
     this.url = config.baseUrl;
     this.headers = config.headers;
@@ -69,7 +69,7 @@ class Api {
   }
 }
 
-const api = new Api({
+const mainApi = new MainApi({
   baseUrl:
     process.env.NODE_ENV === "production"
       ? "https://api.pakhomov.nomoredomains.rocks"
@@ -80,4 +80,4 @@ const api = new Api({
   },
 });
 
-export default api;
+export default mainApi;

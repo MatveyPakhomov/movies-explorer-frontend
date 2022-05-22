@@ -7,15 +7,20 @@ export const validationConfig = {
   errorClass: "popup__input-error_active",
 };
 
-export function cardConfig(data) {
+export function movieConfig(data) {
   return {
-    ownerId: data.owner._id,
-    cardId: data._id,
-    key: data._id,
-    url: data.link,
-    title: data.name,
-    alt: data.name,
-    likes: data.likes,
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: `https://api.nomoreparties.co${data.image.url}`,
+      trailerLink: data.trailerLink,
+      thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+      // owner: Object;
+      movieId: data.id,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
   };
 }
 

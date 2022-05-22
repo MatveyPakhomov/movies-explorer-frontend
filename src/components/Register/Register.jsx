@@ -44,9 +44,7 @@ function renderInput(props) {
       <span
         id={`${props.component}-name-error`}
         className={`${props.component}__input_error input__error-label`}
-      >
-        Какие то проблемы, мистер?
-      </span>
+      />
     </section>
   );
 }

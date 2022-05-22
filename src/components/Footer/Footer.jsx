@@ -19,14 +19,14 @@ export default function Footer() {
       <div className="footer__links-section">
         <p className="footer__links-year">&copy; {currentYear}</p>
         <div className="footer__links">
-          <a href="http://#" className="footer__link">
+          <a href="https://practicum.yandex.ru/" className="footer__link">
             Яндекс.Практикум
           </a>
-          <a href="http://#" className="footer__link">
+          <a href="https://github.com/" className="footer__link">
             Github
           </a>
-          <a href="http://#" className="footer__link">
-            Facebook
+          <a href="https://ru-ru.facebook.com/" className="footer__link">
+            Facebook (был когда-то)
           </a>
         </div>
       </div>

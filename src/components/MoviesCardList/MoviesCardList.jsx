@@ -2,16 +2,13 @@ import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList(onCardLike, handlMoreMoviesClick) {
-  return (
-    <>
-      <section className="moviesCardList">
-        <ul className="moviesCardList__list">
-          {movies.map(({ key, ...options }) => (
-            <MoviesCard onCardLike={onCardLike} key={key} {...options} />
-          ))}
-        </ul>
-      </section>
+export default function MoviesCardList({
+  movies,
+  onCardLike,
+  handlMoreMoviesClick,
+}) {
+  function renderMoreButton() {
+    return (
       <section className="moviesCardList__moreMovies-button-section">
         <button
           type="button"
@@ -22,11 +19,25 @@ export default function MoviesCardList(onCardLike, handlMoreMoviesClick) {
           Ещё
         </button>
       </section>
+    );
+  }
+  return (
+    <>
+      <section className="moviesCardList">
+        <ul className="moviesCardList__list">
+          {movies.length
+            ? movies.map(({ key, ...options }) => (
+                <MoviesCard onCardLike={onCardLike} key={key} {...options} />
+              ))
+            : ""}
+        </ul>
+      </section>
+      {movies.length ? renderMoreButton() : ""}
     </>
   );
 }
 
-export const movies = [
+export const defaultMovies = [
   {
     url: "https://cdn.pastemagazine.com/www/articles/2019/06/07/black-mirror-season-5-logo-main/black-mirror-season-5-logo-main.jpg",
     title: "33 слова о дизайне",

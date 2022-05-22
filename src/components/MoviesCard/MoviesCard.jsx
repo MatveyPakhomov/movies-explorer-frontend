@@ -1,29 +1,33 @@
 import React from "react";
 import "./MoviesCard.css";
 
-export default function MoviesCard(props) {
+export default function MoviesCard({
+  isLiked,
+  handleClick,
+  onCardLike,
+  ...props
+}) {
   const cardLikeButtonClassName = `moviesCard__like-button ${
-    props.isLiked ? "moviesCard__like-button_active" : ""
+    isLiked ? "moviesCard__like-button_active" : ""
   }`;
 
-  function handleClick() {
-    props.handleClick(props);
+  function handleImageClick() {
+    handleClick(props);
   }
 
   function handleLikeClick() {
-    props.onCardLike(props);
+    onCardLike(props);
   }
-
   return (
     <li className="moviesCard">
       <img
         className="moviesCard__image"
-        onClick={handleClick}
-        src={props.url}
-        alt={props.title}
+        onClick={handleImageClick}
+        src={props.image}
+        alt={props.nameRU}
       />
       <div className="moviesCard__section">
-        <h2 className="moviesCard__title">{props.title}</h2>
+        <h2 className="moviesCard__title">{props.nameRU}</h2>
         <button
           type="button"
           onClick={handleLikeClick}
