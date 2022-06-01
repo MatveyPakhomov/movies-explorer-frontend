@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.739a1c81.css",
+    "main.js": "/static/js/main.33be212a.js",
+    "static/js/787.5fef94a4.chunk.js": "/static/js/787.5fef94a4.chunk.js",
+    "static/media/Inter-Medium.woff": "/static/media/Inter-Medium.f5549f68ca7db479bc7d.woff",
+    "static/media/Inter-Black.woff": "/static/media/Inter-Black.e258f99875304915b846.woff",
+    "static/media/Inter-Regular.woff": "/static/media/Inter-Regular.8398b3762d7b06fc3b8c.woff",
+    "static/media/Inter-Medium.woff2": "/static/media/Inter-Medium.ba68c34a21c5751a2838.woff2",
+    "static/media/Inter-Black.woff2": "/static/media/Inter-Black.ef2d12b9f04d00e319f2.woff2",
+    "static/media/Inter-Regular.woff2": "/static/media/Inter-Regular.6cc68d6b835a3dd06e7e.woff2",
+    "static/media/praktikum-logo.svg": "/static/media/praktikum-logo.f3ef63896fc3f7556a78.svg",
+    "static/media/search.svg": "/static/media/search.338db03a9b3d82c9b0c552f4fa9f9961.svg",
+    "index.html": "/index.html",
+    "static/media/logo.svg": "/static/media/logo.ff8d63432b1ab9c95cbcaebadaed42eb.svg",
+    "static/media/like-button-active.svg": "/static/media/like-button-active.21d9cf11dd426e12bfde.svg",
+    "static/media/like-button.svg": "/static/media/like-button.5757c2cf00d16ed6f27e.svg",
+    "static/media/burger-button.svg": "/static/media/burger-button.08035af1e508cd8cfed5.svg",
+    "static/media/close-button.svg": "/static/media/close-button.80dfd5bd01b8fe0a895e.svg",
+    "static/media/link-arrow.svg": "/static/media/link-arrow.62cc3d1841c06c3215777dfa2eec9a57.svg",
+    "static/media/slider-off.svg": "/static/media/slider-off.8cf2f1354435f31900ca.svg",
+    "static/media/slider-on.svg": "/static/media/slider-on.b5e7a53b7bcdbff7f6c9.svg",
+    "static/media/black-oval-button.svg": "/static/media/black-oval-button.6582cc8c56a313d80ba9.svg",
+    "static/media/grey-rectangle-button.svg": "/static/media/grey-rectangle-button.961fd83fcd5206c30c71.svg",
+    "static/media/grey-oval-button.svg": "/static/media/grey-oval-button.c11def669bff022270bd.svg",
+    "static/media/black-square-button.svg": "/static/media/black-square-button.67b5b76f8847471373e2.svg",
+    "main.739a1c81.css.map": "/static/css/main.739a1c81.css.map",
+    "main.33be212a.js.map": "/static/js/main.33be212a.js.map",
+    "787.5fef94a4.chunk.js.map": "/static/js/787.5fef94a4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.739a1c81.css",
+    "static/js/main.33be212a.js"
+  ]
+}
