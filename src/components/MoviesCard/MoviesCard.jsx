@@ -23,7 +23,7 @@ export default function MoviesCard({
       <img
         className="moviesCard__image"
         onClick={handleImageClick}
-        src={props.image}
+        src={`https://api.nomoreparties.co${props.image.url}`}
         alt={props.nameRU}
       />
       <div className="moviesCard__section">

@@ -18,14 +18,7 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  getCardList() {
-    return fetch(this.url + "/cards", {
-      credentials: "include",
-      headers: this.headers,
-    }).then(this._checkResponse);
-  }
-
-  setUserInfo(data) {
+  updateUserInfo(data) {
     return fetch(this.url + "/users/me", {
       method: "PATCH",
       credentials: "include",
@@ -34,8 +27,15 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  addNewCard(data) {
-    return fetch(this.url + "/cards", {
+  getMoviesList() {
+    return fetch(this.url + "/movies", {
+      credentials: "include",
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
+  addNewMovie(data) {
+    return fetch(this.url + "/movies", {
       method: "POST",
       credentials: "include",
       headers: this.headers,
@@ -43,25 +43,16 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  setUserAvatar(data) {
-    return fetch(this.url + "/users/me/avatar", {
-      method: "PATCH",
-      credentials: "include",
-      headers: this.headers,
-      body: JSON.stringify(data),
-    }).then(this._checkResponse);
-  }
-
-  deleteCard(cardId) {
-    return fetch(this.url + `/cards/${cardId}`, {
+  deleteMovie(movieId) {
+    return fetch(this.url + `/movies/${movieId}`, {
       method: "DELETE",
       credentials: "include",
       headers: this.headers,
     }).then(this._checkResponse);
   }
 
-  changeLikeCardStatus(cardId, isLiked) {
-    return fetch(this.url + `/cards/${cardId}/likes`, {
+  changeLikeCardStatus(movieId, isLiked) {
+    return fetch(this.url + `/movies/${movieId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       credentials: "include",
       headers: this.headers,
@@ -72,8 +63,8 @@ class MainApi {
 const mainApi = new MainApi({
   baseUrl:
     process.env.NODE_ENV === "production"
-      ? "https://api.pakhomov.nomoredomains.rocks"
-      : "http://localhost:3000",
+      ? "https://api.pakhomov.diploma.nomoredomains.work"
+      : "http://localhost:3001",
   headers: {
     Authorization: `Bearer ${document.cookie.slice(4)}`,
     "Content-Type": "application/json",

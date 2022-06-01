@@ -22,9 +22,6 @@ class MoviesApi {
 
 const moviesApi = new MoviesApi({
   baseUrl: "https://api.nomoreparties.co",
-    // process.env.NODE_ENV === "production"
-    //   ? "https://api.nomoreparties.co"
-    //   : "http://localhost:3000",
   headers: {
     // Authorization: `Bearer ${document.cookie.slice(4)}`,
     "Content-Type": "application/json",

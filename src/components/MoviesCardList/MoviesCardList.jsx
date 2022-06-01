@@ -29,10 +29,10 @@ export default function MoviesCardList({
             ? movies.map(({ key, ...options }) => (
                 <MoviesCard onCardLike={onCardLike} key={key} {...options} />
               ))
-            : ""}
+            : null}
         </ul>
       </section>
-      {movies.length ? renderMoreButton() : ""}
+      {movies.length ? renderMoreButton() : null}
     </>
   );
 }

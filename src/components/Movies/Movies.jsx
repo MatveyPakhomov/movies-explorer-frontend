@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import moviesApi from "../../utils/MoviesApi";
-import { movieConfig } from "../../utils/utils";
+// import { movieConfig } from "../../utils/utils";
 
 export default function Movies() {
   const [filterCheckbox, setFilterCheckbox] = React.useState(false);
@@ -15,14 +15,18 @@ export default function Movies() {
 
   function searchMovies(e) {
     e.preventDefault();
-    // console.log(e.target[0].value); значение инпута
     moviesApi
       .getMoviesList()
-      .then((moviesList) => {
+      .then((movies) => {
         setMovies(
-          moviesList.map((movie) => {
-            movie.toLowerCase().includes(e.target[0].value);
-            return movieConfig(movie)
+          movies.filter((movie) => {
+            const movieTitle = movie.nameRU.toLowerCase();
+            if (movieTitle.includes(e.target[0].value.toLowerCase())) {
+              return movie;
+            } else if (filterCheckbox && movie.duration < 40) {
+              console.log(11, movie.duration)
+              return movie
+            } else return null;
           })
         );
       })

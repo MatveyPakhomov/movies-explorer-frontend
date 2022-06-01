@@ -1,7 +1,7 @@
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://api.pakhomov.nomoredomains.rocks"
-    : "http://localhost:3000";
+    ? "https://api.pakhomov.diploma.nomoredomains.work"
+    : "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -22,7 +22,7 @@ export const register = (email, password) => {
   }).then(checkResponse);
 };
 
-export const login = (email, password) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     credentials: "include",
@@ -35,6 +35,19 @@ export const login = (email, password) => {
 
 export const getProfile = () => {
   return fetch(`${BASE_URL}/profile`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then(checkResponse)
+    .then((data) => data);
+};
+
+export const getContent = () => {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
