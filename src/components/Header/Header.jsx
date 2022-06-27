@@ -3,14 +3,7 @@ import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import headerLogo from "../../images/logo.svg";
 
-export default function Header({
-  onLogin,
-  onProfile,
-  onRegister,
-  onAbout,
-  onSavedMovies,
-  onNavigation,
-}) {
+export default function Header({ onLogin, onProfile, onNavigation }) {
   const location = useLocation();
   const pathname = location.pathname;
   const arr = ["/", "/movies", "/saved-movies", "/profile"];
@@ -30,11 +23,7 @@ export default function Header({
 
   if (!mainPage) {
     savedMoviesLink = (
-      <Link
-        to={"/saved-movies"}
-        className={"header__link_saved-movies"}
-        onClick={onSavedMovies}
-      >
+      <Link to={"/saved-movies"} className={"header__link_saved-movies"}>
         {"Сохраненные Фильмы"}
       </Link>
     );
@@ -53,7 +42,6 @@ export default function Header({
           className={
             mainPage ? "header__link" : "header__link header__link_big-size"
           }
-          onClick={onRegister}
         >
           {mainPage ? "Регистрация" : "Фильмы"}
         </Link>
@@ -75,13 +63,15 @@ export default function Header({
   );
 
   if (!mainPage && windowWidth) {
-    headerRightButtons = <button className="header__burger-button" onClick={onNavigation}></button>;
+    headerRightButtons = (
+      <button className="header__burger-button" onClick={onNavigation}></button>
+    );
   }
 
   return match ? (
     <header className={mainPage ? "header" : "header header-white"}>
       <section className="header__section">
-        <Link to={"/"} className="header__link header__logo" onClick={onAbout}>
+        <Link to={"/"} className="header__link header__logo">
           <img src={headerLogo} alt="Логотип" className="header__logo" />
         </Link>
         {headerRightButtons}

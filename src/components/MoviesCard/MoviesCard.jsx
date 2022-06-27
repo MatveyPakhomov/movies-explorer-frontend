@@ -11,6 +11,11 @@ export default function MoviesCard({
     isLiked ? "moviesCard__like-button_active" : ""
   }`;
 
+  let movieDuration = props.duration + " мин";
+  if (props.duration >= 60) {
+    movieDuration = ((props.duration / 60) | 0) + " ч " + (props.duration % 60) + " мин";
+  }
+
   function handleImageClick() {
     handleClick(props);
   }
@@ -35,7 +40,7 @@ export default function MoviesCard({
           className={cardLikeButtonClassName}
         ></button>
       </div>
-      <p className="moviesCard__duration">{props.duration}</p>
+      <p className="moviesCard__duration">{movieDuration}</p>
     </li>
   );
 }

@@ -34,7 +34,7 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  addNewMovie(data) {
+  saveMovie(data) {
     return fetch(this.url + "/movies", {
       method: "POST",
       credentials: "include",

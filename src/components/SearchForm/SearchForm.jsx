@@ -1,40 +1,77 @@
 import React from "react";
 import "./SearchForm.css";
 import searchImage from "../../images/search.svg";
-// import moviesApi from "../../utils/MoviesApi";
+import { useFormWithValidation } from "../../hooks/useForm";
+import moviesApi from "../../utils/MoviesApi";
 
 export default function SearchForm({
-  onSubmit,
   changeFilterCheckbox,
   filterCheckbox,
+  setRequestMovie,
+  requestMovie,
+  movies,
+  setIsPreloaderOpen,
+  setMovies,
 }) {
-  // function handleChange(e) {
-  //   // const { name, value } = e.target;
-  //   // setState((prev) => ({
-  //   //   ...prev,
-  //   //   [name]: value,
-  //   // }));
-  // }
+  const { values, handleChange, handleSubmit, errors, resetForm, isValid } =
+    useFormWithValidation();
 
-  // function onSubmit() {
-  //   onSubmit
-  // }
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    handleSubmit(e);
+    if (isValid) {
+      setIsPreloaderOpen(true);
+      moviesApi
+        .getMoviesList()
+        .then((moviesData) => {
+          setMovies(
+            moviesData.filter((movie) => {
+              const movieTitle = movie.nameRU.toLowerCase();
+              if (movieTitle.includes(e.target[0].value.toLowerCase())) {
+                return movie;
+              } else return null;
+            })
+          );
+          resetForm({}, {}, false);
+        })
+        .then(() => {
+          localStorage.setItem(
+            "searchMovie",
+            JSON.stringify({
+              requestMovie: requestMovie,
+              moives: movies,
+              filterCheckbox: filterCheckbox,
+            })
+          );
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setIsPreloaderOpen(false);
+        });
+    }
+  }
 
   return (
     <section className="searchForm">
-      <form className="searchForm__form" onSubmit={onSubmit}>
+      <form className="searchForm__form" onSubmit={handleFormSubmit} noValidate>
         <div className="searchForm__section">
           <img
             className="searchForm__search-image"
             src={searchImage}
             alt="Картинка: Лупа в кружке"
           />
-          <input
-            className="searchForm__input"
-            placeholder="Фильм"
-            // onChange={handleChange}
-            required
-          />
+          <section className="searchForm__input-section">
+            <input
+              type="text"
+              name="name"
+              className="searchForm__input"
+              placeholder="Фильм"
+              value={values.name || ""}
+              onChange={handleChange}
+              required
+            />
+            <span className="searchForm__input-error">{errors.name || ""}</span>
+          </section>
           <button type="submit" className="searchForm__submit-button">
             Найти
           </button>

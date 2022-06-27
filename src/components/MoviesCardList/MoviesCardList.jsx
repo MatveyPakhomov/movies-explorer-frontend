@@ -6,6 +6,7 @@ export default function MoviesCardList({
   movies,
   onCardLike,
   handlMoreMoviesClick,
+  isMoviesNotFound,
 }) {
   function renderMoreButton() {
     return (
@@ -26,10 +27,15 @@ export default function MoviesCardList({
       <section className="moviesCardList">
         <ul className="moviesCardList__list">
           {movies.length
-            ? movies.map(({ key, ...options }) => (
-                <MoviesCard onCardLike={onCardLike} key={key} {...options} />
+            ? movies.map((options) => (
+                <MoviesCard
+                  onCardLike={onCardLike}
+                  key={options.id}
+                  {...options}
+                />
               ))
             : null}
+            {isMoviesNotFound ? "aogofdgyu" : null}
         </ul>
       </section>
       {movies.length ? renderMoreButton() : null}

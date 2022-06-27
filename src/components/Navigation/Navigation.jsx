@@ -2,19 +2,9 @@ import React from "react";
 import "./Navigation.css";
 import { Link } from "react-router-dom";
 
-export default function Navigation({
-  onProfile,
-  onMain,
-  onMovies,
-  onSavedMovies,
-  onClose,
-  isOpen,
-}) {
-
+export default function Navigation({ onProfile, onClose, isOpen }) {
   return (
-    <section
-      className={`navigation ${isOpen ? "popup_opened" : ""}`}
-    >
+    <section className={`navigation ${isOpen ? "popup_opened" : ""}`}>
       <div className="navigation__container">
         <button
           type="button"
@@ -23,25 +13,13 @@ export default function Navigation({
           className="navigation__close-button"
         ></button>
         <section className={"navigation__links-section"}>
-          <Link
-            to={"/"}
-            className={"navigation__link"}
-            onClick={onMain}
-          >
+          <Link to={"/"} className={"navigation__link"}>
             {"Главная"}
           </Link>
-          <Link
-            to={"/movies"}
-            className={"navigation__link"}
-            onClick={onMovies}
-          >
+          <Link to={"/movies"} className={"navigation__link"}>
             {"Фильмы"}
           </Link>
-          <Link
-            to={"/saved-movies"}
-            className={"navigation__link"}
-            onClick={onSavedMovies}
-          >
+          <Link to={"/saved-movies"} className={"navigation__link"}>
             {"Сохранённые фильмы"}
           </Link>
         </section>
