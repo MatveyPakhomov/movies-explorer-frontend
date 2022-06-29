@@ -32,7 +32,6 @@ export function useFormWithValidation() {
   const handleSubmit = (event) => {
     const target = event.target;
     const isValid = target.closest("form").checkValidity();
-
     if (!isValid) {
       setErrors({ ...errors, name: "Нужно ввести ключевое слово." });
       return;

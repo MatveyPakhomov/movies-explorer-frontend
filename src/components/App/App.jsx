@@ -4,6 +4,7 @@ import "./App.css";
 import "../../index.css";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
@@ -13,19 +14,22 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import Navigation from "../Navigation/Navigation";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
-import moviesApi from "../../utils/MoviesApi";
 import mainApi from "../../utils/MainApi";
 import * as auth from "../../utils/auth";
 import { movieConfig } from "../../utils/utils";
 import { useFormWithValidation } from "../../hooks/useForm";
+// import moviesApi from "../../utils/MoviesApi";
 
 export default function App() {
+  const localStorageMovies = (JSON.parse(localStorage.getItem("searchMovie"))).movies;
+  const localStorageFilterCheckbox = (JSON.parse(localStorage.getItem("searchMovie"))).filterCheckbox;
   const [isNavigationOpen, setIsNavigationOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState([]);
+  const [movies, setMovies] = React.useState(localStorageMovies || []);
+  // const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [isMoviesNotFound, setIsMoviesNotFound] = React.useState(false);
-  const [requestMovie, setRequestMovie] = React.useState("");
-  const [filterCheckbox, setFilterCheckbox] = React.useState(false);
+  const [isRequestError, setIsRequestError] = React.useState(false);
+  const [filterCheckbox, setFilterCheckbox] = React.useState(localStorageFilterCheckbox || false);
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState({});
@@ -36,10 +40,19 @@ export default function App() {
   function handleNavigationClick() {
     setIsNavigationOpen(true);
   }
-  console.log(JSON.parse(localStorage.getItem("searchMovie")));
+  console.log(JSON.parse(localStorage.getItem("searchMovie")), movies);
+
+  // React.useEffect(() => {
+  //   moviesApi
+  //     .getMoviesList()
+  //     .then((moviesData) => {
+  //       setMovies(moviesData);
+  //     })
+  //     .catch((err) => console.log(err))
+  // }, []);
 
   function handleFilterCheckboxChange() {
-    filterCheckbox ? setFilterCheckbox(false) : setFilterCheckbox(true);
+    setFilterCheckbox(!filterCheckbox);
   }
 
   function closePopup() {
@@ -76,38 +89,6 @@ export default function App() {
     document.addEventListener("mousedown", handleOverlayClose);
     return () => document.removeEventListener("mousedown", handleOverlayClose);
   }, []);
-
-  // function searchMovies(e) {
-  //   e.preventDefault();
-  //   setIsPreloaderOpen(true);
-  //   moviesApi
-  //     .getMoviesList()
-  //     .then((moviesData) => {
-  //       setMovies(
-  //         moviesData.filter((movie) => {
-  //           const movieTitle = movie.nameRU.toLowerCase();
-  //           if (movieTitle.includes(e.target[0].value.toLowerCase())) {
-  //             return movie;
-  //           } else return null;
-  //         })
-  //       );
-  //       resetForm({}, {}, false);
-  //     })
-  //     .then(() => {
-  //       localStorage.setItem(
-  //         "searchMovie",
-  //         JSON.stringify({
-  //           requestMovie: requestMovie,
-  //           moives: movies,
-  //           filterCheckbox: filterCheckbox,
-  //         })
-  //       );
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => {
-  //       setIsPreloaderOpen(false);
-  //     });
-  // }
 
   function handleUpdateUser(data) {
     mainApi
@@ -249,19 +230,35 @@ export default function App() {
             element={
               <Movies
                 movies={movies}
-                // searchMovies={searchMovies}
                 filterCheckbox={filterCheckbox}
                 handleCheckboxChange={handleFilterCheckboxChange}
                 isPreloaderOpen={isPreloaderOpen}
-                setRequestMovie={setRequestMovie}
-                requestMovie={requestMovie}
                 isMoviesNotFound={isMoviesNotFound}
                 setIsPreloaderOpen={setIsPreloaderOpen}
                 setMovies={setMovies}
+                setIsMoviesNotFound={setIsMoviesNotFound}
+                isRequestError={isRequestError}
+                setIsRequestError={setIsRequestError}
               />
             }
           />
-          <Route path="/saved-movies" element={<Movies />} />
+          <Route
+            path="/saved-movies"
+            element={
+              <SavedMovies
+                movies={movies}
+                filterCheckbox={filterCheckbox}
+                handleCheckboxChange={handleFilterCheckboxChange}
+                isPreloaderOpen={isPreloaderOpen}
+                isMoviesNotFound={isMoviesNotFound}
+                setIsPreloaderOpen={setIsPreloaderOpen}
+                setMovies={setMovies}
+                setIsMoviesNotFound={setIsMoviesNotFound}
+                isRequestError={isRequestError}
+                setIsRequestError={setIsRequestError}
+              />
+            }
+          />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route
