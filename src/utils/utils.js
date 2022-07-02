@@ -14,11 +14,10 @@ export function movieConfig(data) {
       duration: data.duration,
       year: data.year,
       description: data.description,
-      image: `https://api.nomoreparties.co${data.image.url}`,
+      image: data.image,
       trailerLink: data.trailerLink,
-      thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
-      // owner: Object;
-      movieId: data.id,
+      thumbnail: data.thumbnail,
+      movieId: data.movieId,
       nameRU: data.nameRU,
       nameEN: data.nameEN,
   };

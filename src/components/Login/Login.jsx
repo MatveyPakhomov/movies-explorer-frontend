@@ -3,10 +3,10 @@ import "./Login.css";
 import "../Register/Register.css";
 import headerLogo from "../../images/logo.svg";
 import { renderTop, renderInput, renderBottom } from "../SimpleForm/SimpleForm";
-import { useForm } from "../../hooks/useForm";
+import { useFormWithValidation } from "../../hooks/useForm";
 
-export default function Login(onLogin) {
-  const { values, handleChange } = useForm();
+export default function Login({ onLogin }) {
+  const { values, errors, handleChange, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +27,7 @@ export default function Login(onLogin) {
     name: "email",
     type: "email",
     value: values.email,
+    error: errors.email,
     handleChange: handleChange,
   };
 
@@ -38,6 +39,7 @@ export default function Login(onLogin) {
     name: "password",
     type: "password",
     value: values.password,
+    error: errors.password,
     handleChange: handleChange,
   };
 
@@ -48,6 +50,7 @@ export default function Login(onLogin) {
     actionTitle: "Ещё не зарегистрированы?",
     actionButton: "Регистрация",
     onClick: handleSubmit,
+    disabled: !isValid,
   };
 
   return (

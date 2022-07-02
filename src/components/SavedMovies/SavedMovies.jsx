@@ -1,40 +1,79 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import { useLocation } from "react-router-dom";
 
 export default function SavedMovies({
-  movies,
-  filterCheckbox,
-  handleCheckboxChange,
-  isPreloaderOpen,
   isMoviesNotFound,
-  setIsPreloaderOpen,
-  setMovies,
   setIsMoviesNotFound,
   isRequestError,
   setIsRequestError,
+  handleSearchRequest,
+  handleSaveMovie,
+  localMovies,
+  filterCheckbox,
+  setFilterCheckbox,
+  filterShortMovies,
+  handleDeleteMovie,
+  handleLikedMovie,
+  savedMovies,
+  isPreloaderOpen,
+  setIsPreloaderOpen,
+  checkIsLiked,
 }) {
+  let location = useLocation();
+  const [textRequest, setTextRequest] = React.useState("");
+  const [findedMovies, setFindedMovies] = React.useState([]);
+
+  useEffect(() => {
+    handleMoviesSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [textRequest]);
+
+  useEffect(() => {
+    setFindedMovies(savedMovies);
+  }, [savedMovies]);
+
+  function handleMoviesSearch() {
+    if (textRequest) {
+      setFindedMovies(handleSearchRequest(savedMovies, textRequest));
+      setTimeout(() => setIsPreloaderOpen(false), 1500);
+    }
+  }
+
   return (
     <section className="savedMovies">
       <SearchForm
-        changeFilterCheckbox={handleCheckboxChange}
+        textRequest={textRequest}
+        setTextRequest={setTextRequest}
         filterCheckbox={filterCheckbox}
+        setFilterCheckbox={setFilterCheckbox}
         setIsPreloaderOpen={setIsPreloaderOpen}
-        setMovies={setMovies}
-        setIsMoviesNotFound={setIsMoviesNotFound}
-        setIsRequestError={setIsRequestError}
       />
       {isMoviesNotFound ? (
-        <div className="savedMovies__section_notFound">Ничего не найдено :(</div>
+        <div className="savedMovies__section_notFound">
+          Ничего не найдено :(
+        </div>
       ) : (
         <Preloader isOpen={isPreloaderOpen} />
       )}
       <MoviesCardList
-        movies={movies}
+        textRequest={textRequest}
+        isPreloaderOpen={isPreloaderOpen}
+        filterShortMovies={filterShortMovies}
+        findedMovies={findedMovies}
+        setFindedMovies={setFindedMovies}
+        handleSearchRequest={handleSearchRequest}
+        localMovies={localMovies}
+        checkIsLiked={checkIsLiked}
+        handleSaveMovie={handleSaveMovie}
+        handleDeleteMovie={handleDeleteMovie}
+        handleLikedMovie={handleLikedMovie}
         filterCheckbox={filterCheckbox}
-        isRequestError={isRequestError}
+        locationPathname={location.pathname}
+        setIsMoviesNotFound={setIsMoviesNotFound}
       />
     </section>
   );

@@ -10,7 +10,7 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
 }
 
-export const register = (email, password) => {
+export const register = (inputValues) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     credentials: "include",
@@ -18,19 +18,18 @@ export const register = (email, password) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(inputValues),
   }).then(checkResponse);
 };
 
-export const authorize = (email, password) => {
-  console.log('hello')
+export const authorize = (inputValues) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(inputValues),
   }).then(checkResponse);
 };
 

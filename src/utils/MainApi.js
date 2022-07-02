@@ -1,3 +1,5 @@
+import { movieConfig } from "./utils";
+
 class MainApi {
   constructor(config) {
     this.url = config.baseUrl;
@@ -18,42 +20,34 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  updateUserInfo(data) {
+  updateUserInfo(name, email) {
     return fetch(this.url + "/users/me", {
       method: "PATCH",
       credentials: "include",
       headers: this.headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify(name, email),
     }).then(this._checkResponse);
   }
 
-  getMoviesList() {
+  getSavedMovies() {
     return fetch(this.url + "/movies", {
       credentials: "include",
       headers: this.headers,
     }).then(this._checkResponse);
   }
 
-  saveMovie(data) {
+  setSavedMovie(movie) {
     return fetch(this.url + "/movies", {
       method: "POST",
       credentials: "include",
-      headers: this.headers,
-      body: JSON.stringify(data),
+      headers: this._headers,
+      body: JSON.stringify(movieConfig(movie)),
     }).then(this._checkResponse);
   }
 
-  deleteMovie(movieId) {
-    return fetch(this.url + `/movies/${movieId}`, {
+  deleteMovie(movie) {
+    return fetch(this.url + `/movies/${movie._id}`, {
       method: "DELETE",
-      credentials: "include",
-      headers: this.headers,
-    }).then(this._checkResponse);
-  }
-
-  changeLikeCardStatus(movieId, isLiked) {
-    return fetch(this.url + `/movies/${movieId}/likes`, {
-      method: isLiked ? "DELETE" : "PUT",
       credentials: "include",
       headers: this.headers,
     }).then(this._checkResponse);

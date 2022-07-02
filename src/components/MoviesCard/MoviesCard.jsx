@@ -1,43 +1,67 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MoviesCard.css";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesCard({
-  isLiked,
-  handleClick,
-  onCardLike,
-  ...props
+  movie,
+  handleLikedMovie,
+  handleDeleteMovie,
+  checkIsLiked,
 }) {
+  let location = useLocation();
+  const pathname = location.pathname;
+  const [isLiked, setIsLiked] = useState(false);
+
+  const isMovieSaved = checkIsLiked(movie);
+
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+    handleLikedMovie(movie);
+  };
+
+  const handleDeleteClick = () => {
+    handleDeleteMovie(movie);
+  }
+
+  useEffect(() => {
+    if (isMovieSaved) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [isMovieSaved]);
+
   const cardLikeButtonClassName = `moviesCard__like-button ${
     isLiked ? "moviesCard__like-button_active" : ""
   }`;
 
-  let movieDuration = props.duration + " мин";
-  if (props.duration >= 60) {
-    movieDuration = ((props.duration / 60) | 0) + " ч " + (props.duration % 60) + " мин";
+  let movieDuration = movie.duration + " мин";
+  if (movie.duration >= 60) {
+    movieDuration =
+      ((movie.duration / 60) | 0) + " ч " + (movie.duration % 60) + " мин";
   }
 
-  function handleImageClick() {
-    handleClick(props);
-  }
-
-  function handleLikeClick() {
-    onCardLike(props);
-  }
   return (
     <li className="moviesCard">
-      <img
-        className="moviesCard__image"
-        onClick={handleImageClick}
-        src={`https://api.nomoreparties.co${props.image.url}`}
-        alt={props.nameRU}
-      />
+      <a href={movie.trailerLink} rel="noreferrer" target="_blank">
+        <img
+          className="moviesCard__image"
+          src={movie.image}
+          alt={movie.nameRU}
+        />
+      </a>
       <div className="moviesCard__section">
-        <h2 className="moviesCard__title">{props.nameRU}</h2>
+        <h2 className="moviesCard__title">{movie.nameRU}</h2>
         <button
           type="button"
-          onClick={handleLikeClick}
+          onClick={pathname === "/saved-movies" ? handleDeleteClick : handleLikeClick}
           aria-label="Кнопка: добавить в избранное"
-          className={cardLikeButtonClassName}
+          className={
+            pathname === "/saved-movies"
+              ? "moviesCard__delete-button"
+              : cardLikeButtonClassName
+          }
         ></button>
       </div>
       <p className="moviesCard__duration">{movieDuration}</p>

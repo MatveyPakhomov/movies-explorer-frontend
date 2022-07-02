@@ -1,52 +1,97 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
+import { useFormWithValidation } from "../../hooks/useForm";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-export default function Profile(props) {
+export default function Profile({ handleUpdateUser, logout }) {
+  const currentUser = useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const [name, setName] = useState("");
+  const [email, setDescription] = useState("");
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.email);
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (values.name !== undefined) {
+      setName(values.name);
+    }
+    if (values.email !== undefined) {
+      setDescription(values.email);
+    }
+  }, [values]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // console.log(name, email);
+    handleUpdateUser({ name, email });
+  }
+
   return (
     <section className="profile">
       <div className="profile__section">
-        <h1 className="profile__title">Привет, Виталий!</h1>
-        <form className="profile__input-section">
+        <h1 className="profile__title">{`Привет, ${
+          currentUser.name || ""
+        }!`}</h1>
+        <form className="profile__form" onSubmit={handleSubmit}>
           <p htmlFor="name" className="profile__input-label">
             Имя
           </p>
-          <input
-            required
-            id="name"
-            name="name"
-            type="text"
-            defaultValue={profile.name}
-            className="profile__input"
-            placeholder="Имя"
-          />
+          <section className="profile__input-section">
+            <input
+              required
+              id="name"
+              name="name"
+              type="text"
+              className="profile__input"
+              placeholder="Имя"
+              onChange={handleChange}
+              pattern="^[-A-Za-z ]+$|^[-А-Яа-яЁё ]+$"
+              minLength={2}
+              maxLength={200}
+              value={name || ""}
+            />
+            <span id="profile-name-error" className="profile__error-label_top">
+              {errors.name || ""}
+            </span>
+          </section>
         </form>
-        <form className="profile__input-section">
+        <form className="profile__form" onSubmit={handleSubmit}>
           <p htmlFor="email" className="profile__input-label">
             E-mail
           </p>
-          <input
-            required
-            id="email"
-            name="email"
-            type="email"
-            defaultValue={profile.email}
-            className="profile__input"
-            placeholder="E-mail"
-          />
+          <section className="profile__input-section">
+            <input
+              required
+              id="email"
+              name="email"
+              type="email"
+              className="profile__input"
+              placeholder="E-mail"
+              onChange={handleChange}
+              value={email || ""}
+            />
+            <span id="profile-name-error" className="profile__error-label">
+              {errors.email || ""}
+            </span>
+          </section>
         </form>
       </div>
       <div className="profile__buttons-section">
         <button
           type="button"
-          onClick={props.onClick}
+          onClick={handleSubmit}
           aria-label="Кнопка: редактировать"
           className="profile__button profile__button_edit"
+          disabled={!isValid}
         >
           Редактировать
         </button>
         <button
           type="button"
-          onClick={props.onClick}
+          onClick={logout}
           aria-label="Кнопка: выйти из аккаунта"
           className="profile__button profile__button_logout"
         >
@@ -56,8 +101,3 @@ export default function Profile(props) {
     </section>
   );
 }
-
-export const profile = {
-  name: "Виталий",
-  email: "pochta@yandex.ru",
-};

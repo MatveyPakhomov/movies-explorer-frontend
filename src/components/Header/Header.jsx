@@ -3,7 +3,7 @@ import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import headerLogo from "../../images/logo.svg";
 
-export default function Header({ onLogin, onProfile, onNavigation }) {
+export default function Header({ onNavigation, loggedIn }) {
   const location = useLocation();
   const pathname = location.pathname;
   const arr = ["/", "/movies", "/saved-movies", "/profile"];
@@ -38,26 +38,24 @@ export default function Header({ onLogin, onProfile, onNavigation }) {
         }
       >
         <Link
-          to={mainPage ? "/signup" : "/movies"}
+          to={!loggedIn ? "/signup" : "/movies"}
           className={
             mainPage ? "header__link" : "header__link header__link_big-size"
           }
         >
-          {mainPage ? "Регистрация" : "Фильмы"}
+          {!loggedIn ? "Регистрация" : "Фильмы"}
         </Link>
         {savedMoviesLink}
       </section>
       <section className="header__profile-section">
-        <button
-          type="button"
-          onClick={mainPage ? onLogin : onProfile}
-          aria-label={mainPage ? "Кнопка Войти" : "Кнопка Аккаунт"}
+        <Link
+          to={!loggedIn ? "/signin" : "/profile"}
           className={
             mainPage ? "header__link-button" : "header__link-button_grey"
           }
         >
-          {mainPage ? "Войти" : "Аккаунт"}
-        </button>
+          {!loggedIn ? "Войти" : "Аккаунт"}
+        </Link>
       </section>
     </>
   );

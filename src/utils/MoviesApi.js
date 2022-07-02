@@ -11,9 +11,8 @@ class MoviesApi {
     return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
   }
 
-  async getMoviesList() {
+  async getMovies() {
     const res = await fetch(this.url + "/beatfilm-movies", {
-      // credentials: "include", -- надо работаться, нужен ли этот параметр
       headers: this.headers,
     });
     return this._checkResponse(res);
@@ -23,7 +22,6 @@ class MoviesApi {
 const moviesApi = new MoviesApi({
   baseUrl: "https://api.nomoreparties.co",
   headers: {
-    // Authorization: `Bearer ${document.cookie.slice(4)}`,
     "Content-Type": "application/json",
   },
 });

@@ -1,8 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({ movies, onCardLike, isRequestError }) {
+export default function MoviesCardList({
+  filterCheckbox,
+  isRequestError,
+  filterShortMovies,
+  findedMovies,
+  handleDeleteMovie,
+  handleLikedMovie,
+  checkIsLiked,
+  setIsMoviesNotFound,
+}) {
+  const [movies, setMovies] = useState([]);
+
+  const setTypeOfMovies = useCallback(() => {
+    filterCheckbox
+      ? setMovies(filterShortMovies(findedMovies))
+      : setMovies(findedMovies);
+  }, [filterShortMovies, findedMovies, filterCheckbox]);
+
+  useEffect(() => {
+    setTypeOfMovies();
+  }, [setTypeOfMovies]);
+
   const [isDesktopScreen, setIsDesktopScreen] = useState(
     window.matchMedia("(min-width: 1280px)").matches
   );
@@ -15,10 +36,10 @@ export default function MoviesCardList({ movies, onCardLike, isRequestError }) {
   const [isMobileScreen, setIsMobileScreen] = useState(
     window.matchMedia("(max-width: 767px)").matches
   );
-  const [postsToShow, setPostsToShow] = useState([]);
+  const [moviesToShow, setMoviesToShow] = useState([]);
   const [next, setNext] = useState(4);
-  const [postsPerPage, setPostPerPage] = useState(12);
-  let arrayForHoldingPosts = [];
+  const [moviesPerPage, setMoviesPerPage] = useState(12);
+  let arrayForHoldingMovies = [];
 
   useEffect(() => {
     window
@@ -53,19 +74,19 @@ export default function MoviesCardList({ movies, onCardLike, isRequestError }) {
 
   useEffect(() => {
     if (isDesktopScreen) {
-      setPostPerPage(12);
+      setMoviesPerPage(12);
       setNext(4);
     }
     if (isTabletScreen) {
-      setPostPerPage(12);
+      setMoviesPerPage(12);
       setNext(3);
     }
     if (isSmallTabletScreen) {
-      setPostPerPage(8);
+      setMoviesPerPage(8);
       setNext(2);
     }
     if (isMobileScreen) {
-      setPostPerPage(5);
+      setMoviesPerPage(5);
       setNext(2);
     }
   }, [isDesktopScreen, isTabletScreen, isSmallTabletScreen, isMobileScreen]);
@@ -84,28 +105,40 @@ export default function MoviesCardList({ movies, onCardLike, isRequestError }) {
       </section>
     );
   }
+
   function renderMovies() {
-    if (postsToShow.length) {
-      return postsToShow.map((options) => (
-        <MoviesCard onCardLike={onCardLike} key={options.id} {...options} />
+    if (moviesToShow.length) {
+      setIsMoviesNotFound(false);
+      return moviesToShow.map((movie) => (
+        <MoviesCard
+          key={movie.id}
+          movie={movie}
+          handleDeleteMovie={handleDeleteMovie}
+          handleLikedMovie={handleLikedMovie}
+          checkIsLiked={checkIsLiked}
+        />
       ));
-    } else return null;
+    } else {
+      setIsMoviesNotFound(true);
+      return null;
+    }
   }
 
   const loopWithSlice = (start, end) => {
-    const slicedPosts = movies.slice(start, end);
-    if (movies[1] !== postsToShow[1]) {
-      arrayForHoldingPosts = [...slicedPosts];
-    } else arrayForHoldingPosts = [...postsToShow, ...slicedPosts];
-    setPostsToShow(arrayForHoldingPosts);
+    const slicedMovies = movies.slice(start, end);
+    if (moviesToShow[1] === slicedMovies[1] || moviesToShow[1] !== movies[1]) {
+      arrayForHoldingMovies = [...slicedMovies];
+    } else arrayForHoldingMovies = [...moviesToShow, ...slicedMovies];
+    setMoviesToShow(arrayForHoldingMovies);
   };
 
   useEffect(() => {
-    loopWithSlice(0, postsPerPage);
+    loopWithSlice(0, moviesPerPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies]);
 
   const handleShowMorePosts = () => {
-    loopWithSlice(postsToShow.length, postsToShow.length + next);
+    loopWithSlice(moviesToShow.length, moviesToShow.length + next);
   };
 
   return (
@@ -120,8 +153,8 @@ export default function MoviesCardList({ movies, onCardLike, isRequestError }) {
           <ul className="moviesCardList__list">{renderMovies()}</ul>
         )}
       </section>
-      {postsToShow.length &&
-      postsToShow[postsToShow.length - 1] !== movies[movies.length - 1]
+      {moviesToShow.length &&
+      moviesToShow[moviesToShow.length - 1] !== movies[movies.length - 1]
         ? renderMoreButton()
         : null}
     </>

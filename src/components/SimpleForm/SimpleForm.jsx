@@ -32,14 +32,19 @@ function renderInput(props) {
         id={props.id}
         name={props.name}
         type={props.type}
-        value={props.value}
+        value={props.value || ""}
         className={`${props.component}__input input`}
         onChange={props.handleChange}
+        pattern={props.pattern}
+        minLength={props.minLength}
+        maxLength={props.maxLength || 200}
       />
       <span
         id={`${props.component}-name-error`}
         className={`${props.component}__input_error input__error-label`}
-      />
+      >
+        {props.error || ""}
+      </span>
     </section>
   );
 }
@@ -51,6 +56,7 @@ function renderBottom(props) {
         type="submit"
         className={`${props.component}__submit-button bottom__submit-button`}
         onClick={props.onClick}
+        disabled={props.disabled || false}
       >
         {props.submitButton}
       </button>

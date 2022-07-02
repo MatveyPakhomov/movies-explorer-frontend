@@ -1,7 +1,7 @@
 import React from "react";
 import "./InfoTooltip.css"
-import failImage from "../images/fail.svg";
-import successImage from "../images/success.svg";
+import failImage from "../../images/fail.svg";
+import successImage from "../../images/success.svg";
 
 export default function InfoTooltip({ data, ...props }) {
   const successAnswer = "Вы успешно зарегистрировались!";

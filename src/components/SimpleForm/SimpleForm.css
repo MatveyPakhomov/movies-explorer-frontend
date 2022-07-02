@@ -85,10 +85,6 @@
   border-bottom: 1px solid #000;
 }
 
-.input__error {
-  color: #ff4062;
-}
-
 .input__error-label {
   color: #ff4062;
   font-weight: normal;
@@ -102,11 +98,6 @@
 
 .input__error-label:last-child {
   margin-bottom: 0;
-}
-
-.input__error-label_active {
-  opacity: 1;
-  transition: 0.2s all ease-out;
 }
 
 .bottom__container {
@@ -149,6 +140,12 @@
 
 .bottom__submit-button:hover {
   opacity: 0.8;
+  transition: 0.2s all ease-out;
+}
+
+.bottom__submit-button:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
   transition: 0.2s all ease-out;
 }
 

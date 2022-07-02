@@ -1,73 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./SearchForm.css";
 import searchImage from "../../images/search.svg";
 import { useFormWithValidation } from "../../hooks/useForm";
-import moviesApi from "../../utils/MoviesApi";
+import { useLocation } from "react-router-dom";
 
 export default function SearchForm({
   changeFilterCheckbox,
-  filterCheckbox,
-  setIsPreloaderOpen,
-  setMovies,
   setIsMoviesNotFound,
   setIsRequestError,
+  setTextRequest,
+  filterCheckbox,
+  setIsPreloaderOpen,
 }) {
-  const localStorageRequest = JSON.parse(
-    localStorage.getItem("searchMovie")
-  ).requestMovie;
-  const { values, handleChange, handleSubmit, errors, isValid } =
+  const lastRequest = localStorage.getItem("lastRequest");
+  const { values, handleChange, handleSubmit, errors, resetForm, isValid } =
     useFormWithValidation();
-  const [inputValue, setInputValue] = useState(localStorageRequest);
+  const searchValue = values?.name;
+  const location = useLocation();
 
   useEffect(() => {
-    if (values.name !== undefined) {
-      setInputValue(values.name);
-    }
-  }, [values]);
+    resetForm();
+  }, [resetForm]);
 
   function handleFormSubmit(e) {
     e.preventDefault();
     handleSubmit(e);
-    console.log(isValid);
-    if (isValid || inputValue === localStorageRequest) {
+    if (isValid) {
+      setTextRequest(searchValue);
       setIsRequestError(false);
       setIsMoviesNotFound(false);
       setIsPreloaderOpen(true);
-      moviesApi
-        .getMoviesList()
-        .then((moviesData) => {
-          const filteredMovies = moviesData.filter((movie) => {
-            const movieTitle = movie.nameRU.toLowerCase();
-            if (movieTitle.includes(e.target[0].value.toLowerCase())) {
-              return movie;
-            } else return null;
-          });
-          if (!filteredMovies.length) {
-            setIsMoviesNotFound(true);
-          }
-          setMovies(filteredMovies);
-          return filteredMovies;
-        })
-        .then((filteredMovies) => {
-          localStorage.setItem(
-            "searchMovie",
-            JSON.stringify({
-              requestMovie: values.name,
-              movies: filteredMovies,
-              filterCheckbox: filterCheckbox,
-            })
-          );
-        })
-        .catch((err) => {
-          setIsRequestError(true);
-          console.log(err);
-        })
-        .finally(() => {
-          setIsPreloaderOpen(false);
-        });
     }
   }
-  console.log(inputValue);
+
   return (
     <section className="searchForm">
       <form className="searchForm__form" onSubmit={handleFormSubmit} noValidate>
@@ -82,8 +47,12 @@ export default function SearchForm({
               type="text"
               name="name"
               className="searchForm__input"
-              placeholder="Фильм"
-              value={inputValue || ""}
+              placeholder={
+                location.pathname === "/movies"
+                  ? lastRequest || "Фильм"
+                  : "Фильм"
+              }
+              value={searchValue || ""}
               onChange={handleChange}
               required
             />

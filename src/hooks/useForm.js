@@ -25,7 +25,17 @@ export function useFormWithValidation() {
     const name = target.name;
     const value = target.value;
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
+    if (
+      target.id === name &&
+      target.validationMessage === "Введите данные в указанном формате."
+    ) {
+      setErrors({
+        ...errors,
+        name: "Имя должно содержать только латиницу, кириллицу, пробел или дефис.",
+      });
+    } else {
+      setErrors({ ...errors, [name]: target.validationMessage });
+    }
     setIsValid(target.closest("form").checkValidity());
   };
 

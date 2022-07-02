@@ -2,10 +2,10 @@ import React from "react";
 import "./Register.css";
 import headerLogo from "../../images/logo.svg";
 import { renderTop, renderInput, renderBottom } from "../SimpleForm/SimpleForm";
-import { useForm } from "../../hooks/useForm";
+import { useFormWithValidation } from "../../hooks/useForm";
 
-export default function Register(onRegister) {
-  const { values, handleChange } = useForm();
+export default function Register({ onRegister }) {
+  const { values, errors, handleChange, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,17 +18,6 @@ export default function Register(onRegister) {
     title: "Добро пожаловать!",
   };
 
-  const emailInput = {
-    for: "email",
-    component: "register",
-    label: "E-mail",
-    id: "email",
-    name: "email",
-    type: "email",
-    value: values.email,
-    handleChange: handleChange,
-  };
-
   const nameInput = {
     for: "name",
     component: "register",
@@ -37,6 +26,21 @@ export default function Register(onRegister) {
     name: "name",
     type: "text",
     value: values.name,
+    error: errors.name,
+    handleChange: handleChange,
+    pattern: "^[-A-Za-z ]+$|^[-А-Яа-яЁё ]+$",
+    minLength: 2,
+  };
+
+  const emailInput = {
+    for: "email",
+    component: "register",
+    label: "E-mail",
+    id: "email",
+    name: "email",
+    type: "email",
+    value: values.email,
+    error: errors.email,
     handleChange: handleChange,
   };
 
@@ -48,7 +52,9 @@ export default function Register(onRegister) {
     name: "password",
     type: "password",
     value: values.password,
+    error: errors.password,
     handleChange: handleChange,
+    minLength: 8,
   };
 
   const registerBottom = {
@@ -58,6 +64,7 @@ export default function Register(onRegister) {
     actionTitle: "Уже зарегистрированы?",
     actionButton: "Войти",
     onClick: handleSubmit,
+    disabled: !isValid,
   };
 
   return (

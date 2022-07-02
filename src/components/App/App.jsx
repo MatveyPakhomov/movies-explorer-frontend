@@ -1,5 +1,11 @@
 import React from "react";
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 import "../../index.css";
 import Main from "../Main/Main";
@@ -17,58 +23,24 @@ import ProtectedRoute from "../ProtectedRoute";
 import mainApi from "../../utils/MainApi";
 import * as auth from "../../utils/auth";
 import { movieConfig } from "../../utils/utils";
-import { useFormWithValidation } from "../../hooks/useForm";
-// import moviesApi from "../../utils/MoviesApi";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import moviesApi from "../../utils/MoviesApi";
 
 export default function App() {
-  const localStorageMovies = (JSON.parse(localStorage.getItem("searchMovie"))).movies;
-  const localStorageFilterCheckbox = (JSON.parse(localStorage.getItem("searchMovie"))).filterCheckbox;
   const [isNavigationOpen, setIsNavigationOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [movies, setMovies] = React.useState(localStorageMovies || []);
-  // const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [localMovies, setLocalMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [isMoviesNotFound, setIsMoviesNotFound] = React.useState(false);
   const [isRequestError, setIsRequestError] = React.useState(false);
-  const [filterCheckbox, setFilterCheckbox] = React.useState(localStorageFilterCheckbox || false);
+  const [filterCheckbox, setFilterCheckbox] = React.useState(false);
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [userData, setUserData] = React.useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [infoTooltipData, setInfoTooltipData] = React.useState({});
   const navigate = useNavigate();
-  const { resetForm } = useFormWithValidation();
-  function handleNavigationClick() {
-    setIsNavigationOpen(true);
-  }
-  console.log(JSON.parse(localStorage.getItem("searchMovie")), movies);
-
-  // React.useEffect(() => {
-  //   moviesApi
-  //     .getMoviesList()
-  //     .then((moviesData) => {
-  //       setMovies(moviesData);
-  //     })
-  //     .catch((err) => console.log(err))
-  // }, []);
-
-  function handleFilterCheckboxChange() {
-    setFilterCheckbox(!filterCheckbox);
-  }
-
-  function closePopup() {
-    setIsNavigationOpen(false);
-  }
-
-  React.useEffect(() => {
-    if (currentUser) {
-      resetForm(currentUser, {}, true);
-    }
-  }, [currentUser, resetForm]);
-
-  function closeAllPopups() {
-    setIsInfoTooltipOpen(false);
-    setInfoTooltipData({});
-  }
+  const location = useLocation();
+  const pathname = location.pathname;
 
   React.useEffect(() => {
     function handleEscClose(evt) {
@@ -90,63 +62,152 @@ export default function App() {
     return () => document.removeEventListener("mousedown", handleOverlayClose);
   }, []);
 
-  function handleUpdateUser(data) {
-    mainApi
-      .setUserInfo(data)
-      .then((res) => {
-        setCurrentUser(res);
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err));
+  function handleNavigationClick() {
+    setIsNavigationOpen(true);
   }
 
-  function handleMovieLike(props) {
-    const isLiked = props.likes.some((i) => i._id === currentUser._id);
+  React.useEffect(() => {
+    if (loggedIn) {
+      handleGetSavedMovies();
+      isMoviesDownloaded();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
+  React.useEffect(() => {
+    getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const isMoviesDownloaded = React.useCallback(() => {
+    const movies = localStorage.getItem("movies");
+    if (movies) {
+      setLocalMovies(JSON.parse(movies));
+    } else {
+      handleGetMovies();
+    }
+  }, []);
+
+  function handleGetMovies() {
+    moviesApi
+      .getMovies()
+      .then((moviesList) => {
+        const movies = moviesList.map((movie) => {
+          return movieConfig(movie);
+        });
+        localStorage.setItem("movies", JSON.stringify(movies));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        const localMovies = localStorage.getItem("movies");
+        setLocalMovies(JSON.parse(localMovies));
+      });
+  }
+
+  function handleSearchRequest(movies, textRequest) {
+    const searchResult = movies.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(textRequest.toLowerCase());
+    });
+    if (!filterCheckbox) {
+      return searchResult;
+    } else {
+      return filterShortMovies(searchResult);
+    }
+  }
+
+  function filterShortMovies(movies) {
+    return movies.filter((movie) => {
+      return movie.duration <= 40;
+    });
+  }
+
+  function handleGetSavedMovies() {
+    setIsPreloaderOpen(true);
     mainApi
-      .changeLikeCardStatus(props.cardId, isLiked)
-      .then((newCard) => {
-        setMovies((state) =>
-          state.map((item) => {
-            return item.cardId === props.cardId ? movieConfig(newCard) : item;
-          })
+      .getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(
+          movies
+            .slice()
+            .reverse()
+            .filter((item) => item.owner === currentUser._id)
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsPreloaderOpen(false);
+      });
   }
 
-  function handleMovieDelete(props) {
+  function handleSaveMovie(movie) {
     mainApi
-      .deleteMovie(props.cardId)
+      .setSavedMovie(movie)
+      .then((savedMovie) => {
+        setSavedMovies([savedMovie, ...savedMovies]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleDeleteMovie(movie) {
+    const savedMovie = savedMovies.find(
+      (item) => item.movieId === movie.movieId
+    );
+    mainApi
+      .deleteMovie(savedMovie)
       .then(() => {
-        setMovies((state) =>
-          state.filter((item) => {
-            return item.cardId !== props.cardId;
-          })
+        const tempSavedMovies = savedMovies.filter(
+          (item) => item._id !== savedMovie._id
         );
+        setSavedMovies(tempSavedMovies);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function handleSaveMovie(data) {
+  function checkIsLiked(movie) {
+    const isSaved = savedMovies.some((item) => (item.movieId === movie.movieId));
+    return isSaved;
+  };
+
+  function handleLikedMovie(movie) {
+    const isSaved = checkIsLiked(movie)
+    if (!isSaved) {
+      handleSaveMovie(movie);
+    } else {
+      handleDeleteMovie(movie);
+    }
+  }
+
+  function handleFilterCheckboxChange() {
+    setFilterCheckbox(!filterCheckbox);
+    localStorage.setItem("filterCheckbox", JSON.stringify(!filterCheckbox));
+  }
+
+  function closePopup() {
+    setIsNavigationOpen(false);
+  }
+
+  function closeAllPopups() {
+    setInfoTooltipData({});
+    setIsInfoTooltipOpen(false);
+  }
+
+  function handleUpdateUser(name, email) {
     mainApi
-      .saveMovie(data)
-      .then((newCard) => {
-        setMovies(() => [movieConfig(newCard), ...movies]);
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function handleLogin(email, password) {
-    console.log("privet");
-    return auth
-      .authorize(email, password)
+      .updateUserInfo(name, email)
       .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          navigate("/");
-        }
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipData({
+          className: "success",
+        });
+        setCurrentUser(res);
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
@@ -157,15 +218,31 @@ export default function App() {
       });
   }
 
-  function handleRegister(email, password) {
+  function handleLogin(inputValues) {
     return auth
-      .register(email, password)
+      .authorize(inputValues)
+      .then(() => {
+        setLoggedIn(true);
+        navigate("/movies");
+      })
+      .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setInfoTooltipData({
+          className: "fail",
+        });
+        console.log(err);
+      });
+  }
+
+  function handleRegister(inputValues) {
+    return auth
+      .register(inputValues)
       .then(() => {
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "success",
         });
-        navigate("/sign-in");
+        navigate("/movies");
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
@@ -176,28 +253,20 @@ export default function App() {
       });
   }
 
-  function getAuthUserInfo() {
+  function getUserInfo() {
     auth
       .getContent()
       .then((res) => {
+        const { name, email, _id } = res;
+        setCurrentUser({ name, email, _id });
         setLoggedIn(true);
-        navigate("/");
-        setUserData({
-          email: res.email,
-          title: "Выйти",
-          link: "/sign-in",
-        });
+        navigate("/movies");
+        pathname === "/signin" || pathname === "/signup"
+          ? navigate("/movies")
+          : navigate(location.pathname);
       })
       .catch((err) => console.log(err));
   }
-
-  React.useEffect(() => {
-    const jwt = document.cookie.slice(4);
-    if (jwt) {
-      getAuthUserInfo();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
 
   function handleSignOut() {
     const jwt = document.cookie.slice(4);
@@ -205,61 +274,83 @@ export default function App() {
     if (jwt) {
       auth.logout().then(() => {
         setLoggedIn(false);
-        navigate("/sign-in");
-        setUserData({
-          title: "Регистрация",
-          link: "/sign-up",
-        });
+        navigate("/");
+        localStorage.clear();
       });
     }
-    // колхоз?
-    setUserData({
-      title: "Регистрация",
-      link: "/sign-up",
-    });
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header onNavigation={handleNavigationClick} onClose={closePopup} />
+        <Header onNavigation={handleNavigationClick} loggedIn={loggedIn} />
         <Routes>
-          <Route path="/" element={<ProtectedRoute component={Main} />} />
+          <Route
+            path="/"
+            element={<ProtectedRoute component={Main} loggedIn={loggedIn} />}
+          />
           <Route
             path="/movies"
             element={
-              <Movies
-                movies={movies}
-                filterCheckbox={filterCheckbox}
+              <ProtectedRoute
+                component={Movies}
+                loggedIn={loggedIn}
                 handleCheckboxChange={handleFilterCheckboxChange}
-                isPreloaderOpen={isPreloaderOpen}
                 isMoviesNotFound={isMoviesNotFound}
-                setIsPreloaderOpen={setIsPreloaderOpen}
-                setMovies={setMovies}
                 setIsMoviesNotFound={setIsMoviesNotFound}
                 isRequestError={isRequestError}
                 setIsRequestError={setIsRequestError}
+                handleSearchRequest={handleSearchRequest}
+                handleSaveMovie={handleSaveMovie}
+                localMovies={localMovies}
+                filterCheckbox={filterCheckbox}
+                setFilterCheckbox={setFilterCheckbox}
+                filterShortMovies={filterShortMovies}
+                handleDeleteMovie={handleDeleteMovie}
+                handleLikedMovie={handleLikedMovie}
+                savedMovies={savedMovies}
+                isPreloaderOpen={isPreloaderOpen}
+                setIsPreloaderOpen={setIsPreloaderOpen}
+                checkIsLiked={checkIsLiked}
               />
             }
           />
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies
-                movies={movies}
-                filterCheckbox={filterCheckbox}
-                handleCheckboxChange={handleFilterCheckboxChange}
-                isPreloaderOpen={isPreloaderOpen}
+              <ProtectedRoute
+                component={SavedMovies}
+                loggedIn={loggedIn}
                 isMoviesNotFound={isMoviesNotFound}
-                setIsPreloaderOpen={setIsPreloaderOpen}
-                setMovies={setMovies}
                 setIsMoviesNotFound={setIsMoviesNotFound}
                 isRequestError={isRequestError}
                 setIsRequestError={setIsRequestError}
+                handleSearchRequest={handleSearchRequest}
+                handleSaveMovie={handleSaveMovie}
+                localMovies={localMovies}
+                filterCheckbox={filterCheckbox}
+                setFilterCheckbox={setFilterCheckbox}
+                filterShortMovies={filterShortMovies}
+                handleDeleteMovie={handleDeleteMovie}
+                handleLikedMovie={handleLikedMovie}
+                savedMovies={savedMovies}
+                isPreloaderOpen={isPreloaderOpen}
+                setIsPreloaderOpen={setIsPreloaderOpen}
+                checkIsLiked={checkIsLiked}
               />
             }
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute
+                component={Profile}
+                loggedIn={loggedIn}
+                handleUpdateUser={handleUpdateUser}
+                logout={handleSignOut}
+              />
+            }
+          />
           <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route
             path="/signup"
@@ -272,6 +363,11 @@ export default function App() {
         </Routes>
         <Footer />
         <Navigation isOpen={isNavigationOpen} onClose={closePopup} />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          data={infoTooltipData}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

@@ -109,6 +109,23 @@
   transition: 0.2s all ease-out;
 }
 
+.moviesCard__delete-button {
+  background: no-repeat url('../../images/delete-button.svg');
+  width: 24px;
+  height: 24px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s all ease-out;
+  align-self: flex-start;
+}
+
+.moviesCard__delete-button:hover {
+  opacity: 0.8;
+  transition: 0.2s all ease-out;
+}
+
 .moviesCard__duration {
   color: #A0A0A0;
   font-size: 11px;

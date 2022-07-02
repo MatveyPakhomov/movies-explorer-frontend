@@ -24,14 +24,12 @@ export default function Navigation({ onProfile, onClose, isOpen }) {
           </Link>
         </section>
         <section className="navigation__profile-section">
-          <button
-            type="button"
-            onClick={onProfile}
-            aria-label={"Кнопка Аккаунт"}
+          <Link
+            to={"/profile"}
             className={"navigation__button header__link-button_grey"}
           >
             {"Аккаунт"}
-          </button>
+          </Link>
         </section>
       </div>
     </section>
