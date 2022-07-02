@@ -172,12 +172,12 @@ export default function App() {
   }
 
   function checkIsLiked(movie) {
-    const isSaved = savedMovies.some((item) => (item.movieId === movie.movieId));
+    const isSaved = savedMovies.some((item) => item.movieId === movie.movieId);
     return isSaved;
-  };
+  }
 
   function handleLikedMovie(movie) {
-    const isSaved = checkIsLiked(movie)
+    const isSaved = checkIsLiked(movie);
     if (!isSaved) {
       handleSaveMovie(movie);
     } else {

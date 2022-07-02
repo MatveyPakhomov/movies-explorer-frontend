@@ -26,10 +26,10 @@ export default function SearchForm({
     e.preventDefault();
     handleSubmit(e);
     if (isValid) {
-      setTextRequest(searchValue);
       setIsRequestError(false);
       setIsMoviesNotFound(false);
       setIsPreloaderOpen(true);
+      setTextRequest(searchValue);
     }
   }
 

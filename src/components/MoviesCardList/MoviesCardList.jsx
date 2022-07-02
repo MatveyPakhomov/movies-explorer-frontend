@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesCardList({
   filterCheckbox,
@@ -13,6 +14,8 @@ export default function MoviesCardList({
   setIsMoviesNotFound,
 }) {
   const [movies, setMovies] = useState([]);
+  let location = useLocation();
+  const pathname = location.pathname;
 
   const setTypeOfMovies = useCallback(() => {
     filterCheckbox
@@ -108,20 +111,16 @@ export default function MoviesCardList({
 
   function renderMovies() {
     if (moviesToShow.length) {
-      setIsMoviesNotFound(false);
       return moviesToShow.map((movie) => (
         <MoviesCard
-          key={movie.id}
+          key={movie.movieId}
           movie={movie}
           handleDeleteMovie={handleDeleteMovie}
           handleLikedMovie={handleLikedMovie}
           checkIsLiked={checkIsLiked}
         />
       ));
-    } else {
-      setIsMoviesNotFound(true);
-      return null;
-    }
+    } else return null;
   }
 
   const loopWithSlice = (start, end) => {
@@ -154,7 +153,8 @@ export default function MoviesCardList({
         )}
       </section>
       {moviesToShow.length &&
-      moviesToShow[moviesToShow.length - 1] !== movies[movies.length - 1]
+      moviesToShow[moviesToShow.length - 1] !== movies[movies.length - 1] &&
+      pathname !== "saved-movies"
         ? renderMoreButton()
         : null}
     </>
