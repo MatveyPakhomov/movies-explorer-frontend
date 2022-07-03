@@ -58,7 +58,7 @@ export default function SavedMovies({
       />
       {isPreloaderOpen ? (
         <Preloader isOpen={isPreloaderOpen} />
-      ) : !isMoviesNotFound ? (
+      ) : (
         <MoviesCardList
           textRequest={textRequest}
           isPreloaderOpen={isPreloaderOpen}
@@ -75,11 +75,12 @@ export default function SavedMovies({
           locationPathname={location.pathname}
           setIsMoviesNotFound={setIsMoviesNotFound}
         />
-      ) : (
+      )}
+      {isMoviesNotFound && !isRequestError ? (
         <div className="savedMovies__section_notFound">
           Ничего не найдено :(
         </div>
-      )}
+      ) : null}
     </section>
   );
 }

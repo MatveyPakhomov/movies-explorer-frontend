@@ -91,7 +91,7 @@ export default function Movies({
       />
       {isPreloaderOpen ? (
         <Preloader isOpen={isPreloaderOpen} />
-      ) : !isMoviesNotFound ? (
+      ) : (
         <MoviesCardList
           filterCheckbox={filterCheckbox}
           isRequestError={isRequestError}
@@ -105,9 +105,12 @@ export default function Movies({
           checkIsLiked={checkIsLiked}
           setIsMoviesNotFound={setIsMoviesNotFound}
         />
-      ) : (
-        <div className="movies__section_notFound">Ничего не найдено :(</div>
       )}
+      {isMoviesNotFound && !isRequestError ? (
+        <div className="savedMovies__section_notFound">
+          Ничего не найдено :(
+        </div>
+      ) : null}
     </section>
   );
 }

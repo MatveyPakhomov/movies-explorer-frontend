@@ -154,7 +154,8 @@ export default function MoviesCardList({
       </section>
       {moviesToShow.length &&
       moviesToShow[moviesToShow.length - 1] !== movies[movies.length - 1] &&
-      pathname !== "saved-movies"
+      pathname !== "saved-movies" &&
+      !isRequestError
         ? renderMoreButton()
         : null}
     </>
