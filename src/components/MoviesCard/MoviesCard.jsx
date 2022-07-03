@@ -22,7 +22,7 @@ export default function MoviesCard({
 
   const handleDeleteClick = () => {
     handleDeleteMovie(movie);
-  }
+  };
 
   useEffect(() => {
     if (isMovieSaved) {
@@ -55,7 +55,9 @@ export default function MoviesCard({
         <h2 className="moviesCard__title">{movie.nameRU}</h2>
         <button
           type="button"
-          onClick={pathname === "/saved-movies" ? handleDeleteClick : handleLikeClick}
+          onClick={
+            pathname === "/saved-movies" ? handleDeleteClick : handleLikeClick
+          }
           aria-label="Кнопка: добавить в избранное"
           className={
             pathname === "/saved-movies"

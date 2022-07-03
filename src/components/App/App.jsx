@@ -82,6 +82,7 @@ export default function App() {
   const isMoviesDownloaded = React.useCallback(() => {
     const movies = localStorage.getItem("movies");
     if (movies) {
+      handleGetMovies();
       setLocalMovies(JSON.parse(movies));
     } else {
       handleGetMovies();
@@ -89,15 +90,18 @@ export default function App() {
   }, []);
 
   function handleGetMovies() {
+    setIsPreloaderOpen(true);
     moviesApi
       .getMovies()
       .then((moviesList) => {
+        setIsMoviesNotFound(false);
         const movies = moviesList.map((movie) => {
           return movieConfig(movie);
         });
         localStorage.setItem("movies", JSON.stringify(movies));
       })
       .catch((err) => {
+        setIsRequestError(true);
         console.log(err);
       })
       .finally(() => {
@@ -108,8 +112,14 @@ export default function App() {
 
   function handleSearchRequest(movies, textRequest) {
     const searchResult = movies.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(textRequest.toLowerCase());
+      const movieTitle = movie.nameRU.toLowerCase();
+      if (movieTitle.includes(textRequest.toLowerCase())) {
+        return movie;
+      } else return null;
     });
+    if (!searchResult.length) {
+      setIsMoviesNotFound(true);
+    }
     if (!filterCheckbox) {
       return searchResult;
     } else {
@@ -321,6 +331,7 @@ export default function App() {
               <ProtectedRoute
                 component={SavedMovies}
                 loggedIn={loggedIn}
+                handleCheckboxChange={handleFilterCheckboxChange}
                 isMoviesNotFound={isMoviesNotFound}
                 setIsMoviesNotFound={setIsMoviesNotFound}
                 isRequestError={isRequestError}

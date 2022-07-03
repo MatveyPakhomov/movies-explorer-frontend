@@ -44,7 +44,7 @@ export default function Movies({
   }, [handleMoviesSearch]);
 
   const getFilterCheckboxStatus = useCallback(() => {
-    const lastFilterCheckboxStatus = localStorage.getItem("checkboxStatus");
+    const lastFilterCheckboxStatus = localStorage.getItem("filterCheckbox");
     if (lastFilterCheckboxStatus === "true") {
       return true;
     } else {
@@ -89,24 +89,25 @@ export default function Movies({
         setFilterCheckbox={setFilterCheckbox}
         setIsPreloaderOpen={setIsPreloaderOpen}
       />
-      {isMoviesNotFound ? (
-        <div className="movies__section_notFound">Ничего не найдено :(</div>
-      ) : (
+      {isPreloaderOpen ? (
         <Preloader isOpen={isPreloaderOpen} />
+      ) : !isMoviesNotFound ? (
+        <MoviesCardList
+          filterCheckbox={filterCheckbox}
+          isRequestError={isRequestError}
+          filterShortMovies={filterShortMovies}
+          findedMovies={findedMovies}
+          savedMovies={savedMovies}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
+          handleLikedMovie={handleLikedMovie}
+          locationPathname={location.pathname}
+          checkIsLiked={checkIsLiked}
+          setIsMoviesNotFound={setIsMoviesNotFound}
+        />
+      ) : (
+        <div className="movies__section_notFound">Ничего не найдено :(</div>
       )}
-      <MoviesCardList
-        filterCheckbox={filterCheckbox}
-        isRequestError={isRequestError}
-        filterShortMovies={filterShortMovies}
-        findedMovies={findedMovies}
-        savedMovies={savedMovies}
-        handleSaveMovie={handleSaveMovie}
-        handleDeleteMovie={handleDeleteMovie}
-        handleLikedMovie={handleLikedMovie}
-        locationPathname={location.pathname}
-        checkIsLiked={checkIsLiked}
-        setIsMoviesNotFound={setIsMoviesNotFound}
-      />
     </section>
   );
 }

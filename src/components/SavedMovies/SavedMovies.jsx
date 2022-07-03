@@ -22,6 +22,7 @@ export default function SavedMovies({
   isPreloaderOpen,
   setIsPreloaderOpen,
   checkIsLiked,
+  handleCheckboxChange,
 }) {
   let location = useLocation();
   const [textRequest, setTextRequest] = React.useState("");
@@ -51,30 +52,34 @@ export default function SavedMovies({
         filterCheckbox={filterCheckbox}
         setFilterCheckbox={setFilterCheckbox}
         setIsPreloaderOpen={setIsPreloaderOpen}
+        changeFilterCheckbox={handleCheckboxChange}
+        setIsMoviesNotFound={setIsMoviesNotFound}
+        setIsRequestError={setIsRequestError}
       />
-      {isMoviesNotFound ? (
+      {isPreloaderOpen ? (
+        <Preloader isOpen={isPreloaderOpen} />
+      ) : !isMoviesNotFound ? (
+        <MoviesCardList
+          textRequest={textRequest}
+          isPreloaderOpen={isPreloaderOpen}
+          filterShortMovies={filterShortMovies}
+          findedMovies={findedMovies}
+          setFindedMovies={setFindedMovies}
+          handleSearchRequest={handleSearchRequest}
+          localMovies={localMovies}
+          checkIsLiked={checkIsLiked}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
+          handleLikedMovie={handleLikedMovie}
+          filterCheckbox={filterCheckbox}
+          locationPathname={location.pathname}
+          setIsMoviesNotFound={setIsMoviesNotFound}
+        />
+      ) : (
         <div className="savedMovies__section_notFound">
           Ничего не найдено :(
         </div>
-      ) : (
-        <Preloader isOpen={isPreloaderOpen} />
       )}
-      <MoviesCardList
-        textRequest={textRequest}
-        isPreloaderOpen={isPreloaderOpen}
-        filterShortMovies={filterShortMovies}
-        findedMovies={findedMovies}
-        setFindedMovies={setFindedMovies}
-        handleSearchRequest={handleSearchRequest}
-        localMovies={localMovies}
-        checkIsLiked={checkIsLiked}
-        handleSaveMovie={handleSaveMovie}
-        handleDeleteMovie={handleDeleteMovie}
-        handleLikedMovie={handleLikedMovie}
-        filterCheckbox={filterCheckbox}
-        locationPathname={location.pathname}
-        setIsMoviesNotFound={setIsMoviesNotFound}
-      />
     </section>
   );
 }

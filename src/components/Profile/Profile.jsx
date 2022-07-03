@@ -25,7 +25,6 @@ export default function Profile({ handleUpdateUser, logout }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(name, email);
     handleUpdateUser({ name, email });
   }
 
