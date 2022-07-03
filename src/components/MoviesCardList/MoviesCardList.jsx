@@ -94,6 +94,14 @@ export default function MoviesCardList({
     }
   }, [isDesktopScreen, isTabletScreen, isSmallTabletScreen, isMobileScreen]);
 
+  useEffect(() => {
+    if (pathname === "/saved-movies" && movies.length === 0) {
+      setIsMoviesNotFound(true);
+    } else {
+      setIsMoviesNotFound(false);
+    }
+  }, [pathname, movies.length, setIsMoviesNotFound]);
+
   function renderMoreButton() {
     return (
       <section className="moviesCardList__moreMovies-button-section">

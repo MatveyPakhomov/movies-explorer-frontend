@@ -6,7 +6,7 @@ export function movieConfig(movie) {
     duration: movie.duration,
     year: movie.year,
     description: movie.description,
-    image: movie.image.value ? movie.image : url + movie.image.url,
+    image: movie.image?.value ? movie.image : url + movie.image.url,
     trailerLink: movie.trailerLink,
     thumbnail: movie.thumbnail
       ? movie.thumbnail

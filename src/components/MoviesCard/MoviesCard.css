@@ -62,6 +62,7 @@
 }
 
 .moviesCard__title {
+  width: 90%;
   color: #000;
   font-size: 13px;
   font-weight: 500;

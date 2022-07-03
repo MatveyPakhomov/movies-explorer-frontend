@@ -138,12 +138,7 @@ export default function App() {
     mainApi
       .getSavedMovies()
       .then((movies) => {
-        setSavedMovies(
-          movies
-            .slice()
-            .reverse()
-            .filter((item) => item.owner === currentUser._id)
-        );
+        setSavedMovies(movies.filter((item) => item.owner === currentUser._id));
       })
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,3 @@
-import { movieConfig } from "./utils";
-
 class MainApi {
   constructor(config) {
     this.url = config.baseUrl;
@@ -40,8 +38,8 @@ class MainApi {
     return fetch(this.url + "/movies", {
       method: "POST",
       credentials: "include",
-      headers: this._headers,
-      body: JSON.stringify(movieConfig(movie)),
+      headers: this.headers,
+      body: JSON.stringify(movie),
     }).then(this._checkResponse);
   }
 
