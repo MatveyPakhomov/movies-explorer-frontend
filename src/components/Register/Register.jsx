@@ -3,6 +3,7 @@ import "./Register.css";
 import headerLogo from "../../images/logo.svg";
 import { renderTop, renderInput, renderBottom } from "../SimpleForm/SimpleForm";
 import { useFormWithValidation } from "../../hooks/useForm";
+import { regex } from "../../utils/utils";
 
 export default function Register({ onRegister }) {
   const { values, errors, handleChange, isValid } = useFormWithValidation();
@@ -28,8 +29,9 @@ export default function Register({ onRegister }) {
     value: values.name,
     error: errors.name,
     handleChange: handleChange,
-    pattern: "^[-A-Za-z ]+$|^[-А-Яа-яЁё ]+$",
+    pattern: regex.name,
     minLength: 2,
+    maxLength: 30,
   };
 
   const emailInput = {
@@ -42,6 +44,7 @@ export default function Register({ onRegister }) {
     value: values.email,
     error: errors.email,
     handleChange: handleChange,
+    pattern: regex.email,
   };
 
   const passwordInput = {

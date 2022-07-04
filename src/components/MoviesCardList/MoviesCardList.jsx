@@ -95,7 +95,10 @@ export default function MoviesCardList({
   }, [isDesktopScreen, isTabletScreen, isSmallTabletScreen, isMobileScreen]);
 
   useEffect(() => {
-    if (pathname === "/saved-movies" && movies.length === 0) {
+    if (
+      (pathname === "/saved-movies" && movies.length === 0) ||
+      (pathname === "/movies" && movies.length === 0)
+    ) {
       setIsMoviesNotFound(true);
     } else {
       setIsMoviesNotFound(false);

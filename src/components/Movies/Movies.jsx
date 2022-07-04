@@ -86,7 +86,6 @@ export default function Movies({
         setIsRequestError={setIsRequestError}
         setTextRequest={setTextRequest}
         filterCheckbox={filterCheckbox}
-        setFilterCheckbox={setFilterCheckbox}
         setIsPreloaderOpen={setIsPreloaderOpen}
       />
       {isPreloaderOpen ? (

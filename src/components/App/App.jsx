@@ -34,6 +34,8 @@ export default function App() {
   const [isMoviesNotFound, setIsMoviesNotFound] = React.useState(false);
   const [isRequestError, setIsRequestError] = React.useState(false);
   const [filterCheckbox, setFilterCheckbox] = React.useState(false);
+  const [filterShortMoviesCheckbox, setFilterShortMoviesCheckbox] =
+    React.useState(false);
   const [isPreloaderOpen, setIsPreloaderOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
@@ -191,8 +193,17 @@ export default function App() {
   }
 
   function handleFilterCheckboxChange() {
-    setFilterCheckbox(!filterCheckbox);
-    localStorage.setItem("filterCheckbox", JSON.stringify(!filterCheckbox));
+    if (pathname === "/movies") {
+      setFilterCheckbox(!filterCheckbox);
+      localStorage.setItem("filterCheckbox", JSON.stringify(!filterCheckbox));
+    }
+    if (pathname === "/saved-movies") {
+      setFilterShortMoviesCheckbox(!filterShortMoviesCheckbox);
+      localStorage.setItem(
+        "filterShortMoviesCheckbox",
+        JSON.stringify(!filterShortMoviesCheckbox)
+      );
+    }
   }
 
   function closePopup() {
@@ -290,10 +301,7 @@ export default function App() {
       <div className="app">
         <Header onNavigation={handleNavigationClick} loggedIn={loggedIn} />
         <Routes>
-          <Route
-            path="/"
-            element={<ProtectedRoute component={Main} loggedIn={loggedIn} />}
-          />
+          <Route path="/" element={<Main loggedIn={loggedIn} />} />
           <Route
             path="/movies"
             element={
@@ -334,7 +342,7 @@ export default function App() {
                 handleSearchRequest={handleSearchRequest}
                 handleSaveMovie={handleSaveMovie}
                 localMovies={localMovies}
-                filterCheckbox={filterCheckbox}
+                filterCheckbox={filterShortMoviesCheckbox}
                 setFilterCheckbox={setFilterCheckbox}
                 filterShortMovies={filterShortMovies}
                 handleDeleteMovie={handleDeleteMovie}

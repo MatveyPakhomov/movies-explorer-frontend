@@ -26,7 +26,7 @@ export function useFormWithValidation() {
     const value = target.value;
     setValues({ ...values, [name]: value });
     if (
-      target.id === name &&
+      target.id === "name" &&
       target.validationMessage === "Введите данные в указанном формате."
     ) {
       setErrors({

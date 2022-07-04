@@ -60,8 +60,13 @@
   font-size: 12px;
   line-height: 1.33;
   font-weight: 500;
+  margin-right: 20px;
   text-decoration: none;
   transition: 0.2s all ease-out;
+}
+
+.header__link:last-child {
+  margin-right: 0;
 }
 
 .header__link:hover {

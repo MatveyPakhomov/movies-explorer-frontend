@@ -2,16 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import { useFormWithValidation } from "../../hooks/useForm";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { regex } from "../../utils/utils";
 
 export default function Profile({ handleUpdateUser, logout }) {
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } = useFormWithValidation();
   const [name, setName] = useState("");
-  const [email, setDescription] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     setName(currentUser.name);
-    setDescription(currentUser.email);
+    setEmail(currentUser.email);
   }, [currentUser]);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function Profile({ handleUpdateUser, logout }) {
       setName(values.name);
     }
     if (values.email !== undefined) {
-      setDescription(values.email);
+      setEmail(values.email);
     }
   }, [values]);
 
@@ -34,7 +35,7 @@ export default function Profile({ handleUpdateUser, logout }) {
         <h1 className="profile__title">{`Привет, ${
           currentUser.name || ""
         }!`}</h1>
-        <form className="profile__form" onSubmit={handleSubmit}>
+        <form className="profile__form" onSubmit={handleSubmit} noValidate>
           <p htmlFor="name" className="profile__input-label">
             Имя
           </p>
@@ -47,7 +48,7 @@ export default function Profile({ handleUpdateUser, logout }) {
               className="profile__input"
               placeholder="Имя"
               onChange={handleChange}
-              pattern="^[-A-Za-z ]+$|^[-А-Яа-яЁё ]+$"
+              pattern={regex.name}
               minLength={2}
               maxLength={200}
               value={name || ""}
@@ -70,6 +71,7 @@ export default function Profile({ handleUpdateUser, logout }) {
               className="profile__input"
               placeholder="E-mail"
               onChange={handleChange}
+              pattern={regex.email}
               value={email || ""}
             />
             <span id="profile-name-error" className="profile__error-label">
@@ -84,7 +86,10 @@ export default function Profile({ handleUpdateUser, logout }) {
           onClick={handleSubmit}
           aria-label="Кнопка: редактировать"
           className="profile__button profile__button_edit"
-          disabled={!isValid}
+          disabled={
+            !isValid ||
+            (name === currentUser.name && email === currentUser.email)
+          }
         >
           Редактировать
         </button>

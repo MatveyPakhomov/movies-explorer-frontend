@@ -14,7 +14,6 @@ export default function SavedMovies({
   handleSaveMovie,
   localMovies,
   filterCheckbox,
-  setFilterCheckbox,
   filterShortMovies,
   handleDeleteMovie,
   handleLikedMovie,
@@ -50,7 +49,6 @@ export default function SavedMovies({
         textRequest={textRequest}
         setTextRequest={setTextRequest}
         filterCheckbox={filterCheckbox}
-        setFilterCheckbox={setFilterCheckbox}
         setIsPreloaderOpen={setIsPreloaderOpen}
         changeFilterCheckbox={handleCheckboxChange}
         setIsMoviesNotFound={setIsMoviesNotFound}

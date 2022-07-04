@@ -16,3 +16,11 @@ export function movieConfig(movie) {
     nameEN: movie.nameEN,
   };
 }
+
+export const regex = {
+  name: "^[-A-Za-z ]+$|^[-А-Яа-яЁё ]+$",
+  // eslint-disable-next-line no-useless-escape
+  email: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$",
+  // eslint-disable-next-line no-useless-escape
+  url: "/https?:\/\/(www\.)?[\w-.~:/?#[\]@!$&'()*+,;=]{1,256}\.[\w-.~:/?#[\]@!$&'()*+,;=]{1,6}/i",
+};

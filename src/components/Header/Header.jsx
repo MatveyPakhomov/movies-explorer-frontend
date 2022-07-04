@@ -19,15 +19,7 @@ export default function Header({ onNavigation, loggedIn }) {
   }, [windowWidth]);
 
   const mainPage = location.pathname === "/";
-  let savedMoviesLink;
 
-  if (!mainPage) {
-    savedMoviesLink = (
-      <Link to={"/saved-movies"} className={"header__link_saved-movies"}>
-        {"Сохраненные Фильмы"}
-      </Link>
-    );
-  } else savedMoviesLink = null;
   let headerRightButtons = (
     <>
       <section
@@ -45,7 +37,18 @@ export default function Header({ onNavigation, loggedIn }) {
         >
           {!loggedIn ? "Регистрация" : "Фильмы"}
         </Link>
-        {savedMoviesLink}
+        {loggedIn ? (
+          <Link
+            to={"/saved-movies"}
+            className={
+              mainPage
+                ? "header__link"
+                : "header__link_saved-movies header__link header__link_big-size"
+            }
+          >
+            {"Сохраненные Фильмы"}
+          </Link>
+        ) : null}
       </section>
       <section className="header__profile-section">
         <Link
