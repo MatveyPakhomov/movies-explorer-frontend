@@ -22,10 +22,16 @@ export default function SavedMovies({
   setIsPreloaderOpen,
   checkIsLiked,
   handleCheckboxChange,
+  handleGetSavedMovies,
 }) {
   let location = useLocation();
   const [textRequest, setTextRequest] = React.useState("");
   const [findedMovies, setFindedMovies] = React.useState([]);
+
+  useEffect(() => {
+    handleGetSavedMovies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     handleMoviesSearch();

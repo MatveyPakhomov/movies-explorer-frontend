@@ -19,7 +19,6 @@ export default function Movies({
   filterShortMovies,
   handleDeleteMovie,
   handleLikedMovie,
-  savedMovies,
   isPreloaderOpen,
   setIsPreloaderOpen,
   checkIsLiked,
@@ -96,7 +95,6 @@ export default function Movies({
           isRequestError={isRequestError}
           filterShortMovies={filterShortMovies}
           findedMovies={findedMovies}
-          savedMovies={savedMovies}
           handleSaveMovie={handleSaveMovie}
           handleDeleteMovie={handleDeleteMovie}
           handleLikedMovie={handleLikedMovie}

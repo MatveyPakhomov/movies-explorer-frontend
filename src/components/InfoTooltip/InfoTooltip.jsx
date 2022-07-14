@@ -1,14 +1,19 @@
 import React from "react";
-import "./InfoTooltip.css"
+import "./InfoTooltip.css";
 import failImage from "../../images/fail.svg";
 import successImage from "../../images/success.svg";
+import { messages } from "../../utils/utils";
 
 export default function InfoTooltip({ data, ...props }) {
-  const successAnswer = "Вы успешно зарегистрировались!";
-  const failAnswer = "Что-то пошло не так! Попробуйте ещё раз.";
+  const answer = data.message;
+  const message = messages.find(item => item.name === answer);
 
   return (
-    <div className={`popup infoTooltip ${props.isOpen ? "infoTooltip_opened" : ""}`}>
+    <div
+      className={`popup infoTooltip ${
+        props.isOpen ? "infoTooltip_opened" : ""
+      }`}
+    >
       <div className="infoTooltip__container">
         <button
           type="button"
@@ -23,9 +28,7 @@ export default function InfoTooltip({ data, ...props }) {
             data.className === "success" ? "черная галочка" : "красный крестик"
           } в кружке`}
         />
-        <p className={`infoTooltip__title`}>
-          {data.className === "success" ? successAnswer : failAnswer}
-        </p>
+        <p className={`infoTooltip__title`}>{message?.value || ""}</p>
       </div>
     </div>
   );

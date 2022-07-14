@@ -4,6 +4,7 @@ import "../Register/Register.css";
 import headerLogo from "../../images/logo.svg";
 import { renderTop, renderInput, renderBottom } from "../SimpleForm/SimpleForm";
 import { useFormWithValidation } from "../../hooks/useForm";
+import { regex } from "../../utils/utils";
 
 export default function Login({ onLogin }) {
   const { values, errors, handleChange, isValid } = useFormWithValidation();
@@ -29,6 +30,7 @@ export default function Login({ onLogin }) {
     value: values.email,
     error: errors.email,
     handleChange: handleChange,
+    pattern: regex.email,
   };
 
   const passwordInput = {
@@ -41,6 +43,7 @@ export default function Login({ onLogin }) {
     value: values.password,
     error: errors.password,
     handleChange: handleChange,
+    minLength: 8,
   };
 
   const loginBottom = {

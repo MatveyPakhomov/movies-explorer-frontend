@@ -32,6 +32,7 @@ export default function App() {
   const [localMovies, setLocalMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isMoviesNotFound, setIsMoviesNotFound] = React.useState(false);
+  const [isSavedMoviesNotFound, setIsSavedMoviesNotFound] = React.useState(false);
   const [isRequestError, setIsRequestError] = React.useState(false);
   const [filterCheckbox, setFilterCheckbox] = React.useState(false);
   const [filterShortMoviesCheckbox, setFilterShortMoviesCheckbox] =
@@ -70,8 +71,9 @@ export default function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      handleGetSavedMovies();
       isMoviesDownloaded();
+      handleGetSavedMovies();
+      getUserInfo();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
@@ -119,8 +121,11 @@ export default function App() {
         return movie;
       } else return null;
     });
-    if (!searchResult.length) {
+    if (!searchResult.length && pathname === "movies") {
       setIsMoviesNotFound(true);
+    }
+    if (!searchResult.length && pathname === "saved-movies") {
+      setIsSavedMoviesNotFound(true);
     }
     if (!filterCheckbox) {
       return searchResult;
@@ -140,6 +145,7 @@ export default function App() {
     mainApi
       .getSavedMovies()
       .then((movies) => {
+        setIsSavedMoviesNotFound(false);
         setSavedMovies(movies.filter((item) => item.owner === currentUser._id));
       })
       .catch((err) => {
@@ -158,6 +164,10 @@ export default function App() {
       })
       .catch((err) => {
         console.log(err);
+        setInfoTooltipData({
+          className: "fail",
+          message: "errorMessage",
+        });
       });
   }
 
@@ -222,15 +232,19 @@ export default function App() {
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "success",
+          message: "userEditSuccess",
         });
         setCurrentUser(res);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1500);
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "fail",
+          message: "errorMessage",
         });
         console.log(err);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1500);
       });
   }
 
@@ -245,8 +259,10 @@ export default function App() {
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "fail",
+          message: "errorMessage",
         });
         console.log(err);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1500);
       });
   }
 
@@ -254,18 +270,23 @@ export default function App() {
     return auth
       .register(inputValues)
       .then(() => {
+        setLoggedIn(true);
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "success",
+          message: "registerSuccess",
         });
         navigate("/movies");
+        setTimeout(() => setIsInfoTooltipOpen(false), 1500);
       })
       .catch((err) => {
         setIsInfoTooltipOpen(true);
         setInfoTooltipData({
           className: "fail",
+          message: "errorMessage",
         });
         console.log(err);
+        setTimeout(() => setIsInfoTooltipOpen(false), 1500);
       });
   }
 
@@ -288,11 +309,14 @@ export default function App() {
     const jwt = document.cookie.slice(4);
 
     if (jwt) {
-      auth.logout().then(() => {
-        setLoggedIn(false);
-        navigate("/");
-        localStorage.clear();
-      });
+      auth
+        .logout()
+        .then(() => {
+          localStorage.clear();
+          setLoggedIn(false);
+          navigate("/");
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -321,7 +345,6 @@ export default function App() {
                 filterShortMovies={filterShortMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 handleLikedMovie={handleLikedMovie}
-                savedMovies={savedMovies}
                 isPreloaderOpen={isPreloaderOpen}
                 setIsPreloaderOpen={setIsPreloaderOpen}
                 checkIsLiked={checkIsLiked}
@@ -335,8 +358,8 @@ export default function App() {
                 component={SavedMovies}
                 loggedIn={loggedIn}
                 handleCheckboxChange={handleFilterCheckboxChange}
-                isMoviesNotFound={isMoviesNotFound}
-                setIsMoviesNotFound={setIsMoviesNotFound}
+                isSavedMoviesNotFound={isSavedMoviesNotFound}
+                setIsMoviesNotFound={setIsSavedMoviesNotFound}
                 isRequestError={isRequestError}
                 setIsRequestError={setIsRequestError}
                 handleSearchRequest={handleSearchRequest}
@@ -351,6 +374,7 @@ export default function App() {
                 isPreloaderOpen={isPreloaderOpen}
                 setIsPreloaderOpen={setIsPreloaderOpen}
                 checkIsLiked={checkIsLiked}
+                handleGetSavedMovies={handleGetSavedMovies}
               />
             }
           />
