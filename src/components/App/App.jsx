@@ -122,10 +122,10 @@ export default function App() {
         return movie;
       } else return null;
     });
-    if (!searchResult.length && pathname === "movies") {
+    if (!searchResult.length && pathname === "/movies") {
       setIsMoviesNotFound(true);
     }
-    if (!searchResult.length && pathname === "saved-movies") {
+    if (!searchResult.length && pathname === "/saved-movies") {
       setIsSavedMoviesNotFound(true);
     }
     if (!filterCheckbox) {
@@ -301,7 +301,7 @@ export default function App() {
         navigate("/movies");
         pathname === "/signin" || pathname === "/signup"
           ? navigate("/movies")
-          : navigate(location.pathname);
+          : navigate(pathname);
       })
       .catch((err) => console.log(err));
   }
@@ -355,7 +355,7 @@ export default function App() {
                 component={SavedMovies}
                 loggedIn={loggedIn}
                 handleCheckboxChange={handleFilterCheckboxChange}
-                isSavedMoviesNotFound={isSavedMoviesNotFound}
+                isMoviesNotFound={isSavedMoviesNotFound}
                 setIsMoviesNotFound={setIsSavedMoviesNotFound}
                 isRequestError={isRequestError}
                 setIsRequestError={setIsRequestError}

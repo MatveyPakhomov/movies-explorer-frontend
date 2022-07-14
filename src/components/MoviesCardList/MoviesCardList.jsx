@@ -11,7 +11,6 @@ export default function MoviesCardList({
   handleDeleteMovie,
   handleLikedMovie,
   checkIsLiked,
-  setIsMoviesNotFound,
 }) {
   const [movies, setMovies] = useState([]);
   let location = useLocation();
@@ -93,17 +92,6 @@ export default function MoviesCardList({
       setNext(2);
     }
   }, [isDesktopScreen, isTabletScreen, isSmallTabletScreen, isMobileScreen]);
-
-  useEffect(() => {
-    if (
-      (pathname === "/saved-movies" && movies.length === 0) ||
-      (pathname === "/movies" && movies.length === 0)
-    ) {
-      setIsMoviesNotFound(true);
-    } else {
-      setIsMoviesNotFound(false);
-    }
-  }, [pathname, movies.length, setIsMoviesNotFound]);
 
   function renderMoreButton() {
     return (
