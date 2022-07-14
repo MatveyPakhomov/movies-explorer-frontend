@@ -32,7 +32,8 @@ export default function App() {
   const [localMovies, setLocalMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isMoviesNotFound, setIsMoviesNotFound] = React.useState(false);
-  const [isSavedMoviesNotFound, setIsSavedMoviesNotFound] = React.useState(false);
+  const [isSavedMoviesNotFound, setIsSavedMoviesNotFound] =
+    React.useState(false);
   const [isRequestError, setIsRequestError] = React.useState(false);
   const [filterCheckbox, setFilterCheckbox] = React.useState(false);
   const [filterShortMoviesCheckbox, setFilterShortMoviesCheckbox] =
@@ -306,18 +307,14 @@ export default function App() {
   }
 
   function handleSignOut() {
-    const jwt = document.cookie.slice(4);
-
-    if (jwt) {
-      auth
-        .logout()
-        .then(() => {
-          localStorage.clear();
-          setLoggedIn(false);
-          navigate("/");
-        })
-        .catch((err) => console.log(err));
-    }
+    auth
+      .logout()
+      .then(() => {
+        localStorage.clear();
+        setLoggedIn(false);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
