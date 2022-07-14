@@ -13,7 +13,7 @@ export default function MoviesCardList({
   checkIsLiked,
 }) {
   const [movies, setMovies] = useState([]);
-  let location = useLocation();
+  const location = useLocation();
   const pathname = location.pathname;
 
   const setTypeOfMovies = useCallback(() => {

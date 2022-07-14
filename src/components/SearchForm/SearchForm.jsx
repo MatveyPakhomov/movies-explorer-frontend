@@ -17,6 +17,7 @@ export default function SearchForm({
     useFormWithValidation();
   const searchValue = values?.name;
   const location = useLocation();
+  const pathname = location.pathname;
 
   useEffect(() => {
     resetForm();
@@ -28,7 +29,9 @@ export default function SearchForm({
     if (isValid) {
       setIsRequestError(false);
       setIsMoviesNotFound(false);
-      setIsPreloaderOpen(true);
+      if (pathname === "/movies") {
+        setIsPreloaderOpen(true);
+      }
       setTextRequest(searchValue);
     }
   }

@@ -95,7 +95,6 @@ export default function App() {
   }, []);
 
   function handleGetMovies() {
-    setIsPreloaderOpen(true);
     moviesApi
       .getMovies()
       .then((moviesList) => {
@@ -142,7 +141,6 @@ export default function App() {
   }
 
   function handleGetSavedMovies() {
-    setIsPreloaderOpen(true);
     mainApi
       .getSavedMovies()
       .then((movies) => {
@@ -152,9 +150,6 @@ export default function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        setIsPreloaderOpen(false);
-      });
   }
 
   function handleSaveMovie(movie) {
