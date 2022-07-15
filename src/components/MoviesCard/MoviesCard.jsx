@@ -16,8 +16,8 @@ export default function MoviesCard({
   const isMovieSaved = checkIsLiked(movie);
 
   const handleLikeClick = () => {
-    setIsLiked(!isLiked);
     handleLikedMovie(movie);
+    setIsLiked(!isLiked);
   };
 
   const handleDeleteClick = () => {
