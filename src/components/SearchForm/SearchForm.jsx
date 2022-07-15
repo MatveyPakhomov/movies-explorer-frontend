@@ -1,48 +1,66 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SearchForm.css";
 import searchImage from "../../images/search.svg";
+import { useFormWithValidation } from "../../hooks/useForm";
+import { useLocation } from "react-router-dom";
 
-export default function SearchForm(onSubmit) {
-  const [state, setState] = React.useState({
-    movie: "",
-  });
-  const [isSliderOn, setIsSliderOn] = React.useState(false);
+export default function SearchForm({
+  changeFilterCheckbox,
+  setIsMoviesNotFound,
+  setIsRequestError,
+  setTextRequest,
+  filterCheckbox,
+  setIsPreloaderOpen,
+}) {
+  const lastRequest = localStorage.getItem("lastRequest");
+  const { values, handleChange, handleSubmit, errors, resetForm, isValid } =
+    useFormWithValidation();
+  const searchValue = values?.name;
+  const location = useLocation();
+  const pathname = location.pathname;
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
-  function handleSliderClick() {
-    isSliderOn ? setIsSliderOn(false) : setIsSliderOn(true);
-  }
-
-
-  function handleSubmit(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
-    // сюда добавим логику обработки формы регистрации
-    const { movie } = state;
-    onSubmit(movie);
+    handleSubmit(e);
+    if (isValid) {
+      setIsRequestError(false);
+      setIsMoviesNotFound(false);
+      if (pathname === "/movies") {
+        setIsPreloaderOpen(true);
+      }
+      setTextRequest(searchValue);
+    }
   }
 
   return (
     <section className="searchForm">
-      <form className="searchForm__form" onSubmit={handleSubmit}>
+      <form className="searchForm__form" onSubmit={handleFormSubmit} noValidate>
         <div className="searchForm__section">
           <img
             className="searchForm__search-image"
             src={searchImage}
             alt="Картинка: Лупа в кружке"
           />
-          <input
-            className="searchForm__input"
-            placeholder="Фильм"
-            onChange={handleChange}
-            required
-          />
+          <section className="searchForm__input-section">
+            <input
+              type="text"
+              name="name"
+              className="searchForm__input"
+              placeholder={
+                location.pathname === "/movies"
+                  ? lastRequest || "Фильм"
+                  : "Фильм"
+              }
+              value={searchValue || ""}
+              onChange={handleChange}
+              required
+            />
+            <span className="searchForm__input-error">{errors.name || ""}</span>
+          </section>
           <button type="submit" className="searchForm__submit-button">
             Найти
           </button>
@@ -51,8 +69,12 @@ export default function SearchForm(onSubmit) {
       <div className="searchForm__slider-section">
         <button
           type="button"
-          className={isSliderOn ? "searchForm__slider-button_active" : "searchForm__slider-button"}
-          onClick={handleSliderClick}
+          className={
+            filterCheckbox
+              ? "searchForm__slider-button_active"
+              : "searchForm__slider-button"
+          }
+          onClick={changeFilterCheckbox}
         ></button>
         <p className="searchForm__slider-title">Короткометражки</p>
       </div>

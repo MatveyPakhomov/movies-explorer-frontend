@@ -1,33 +1,21 @@
 .login {
   background-color: #fff;
+  max-width: 396px;
   width: 100%;
   height: 100vh;
-  box-sizing: border-box;
+  box-sizing: content-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   padding: 70px 30px 30px;
   transition: 0.2s all ease-out;
 }
 
 @media screen and (max-width: 450px) {
   .login {
-    justify-content: normal;
-    padding: 56px 30px 30px;
-    transition: 0.2s all ease-out;
-  }
-}
-
-.login__section {
-  max-width: 396px;
-  width: 100%;
-  transition: 0.2s all ease-out;
-}
-
-@media screen and (max-width: 450px) {
-  .login__section {
     max-width: 260px;
+    padding: 56px 30px 30px;
     transition: 0.2s all ease-out;
   }
 }
@@ -38,5 +26,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
+  transition: 0.2s all ease-out;
+}
+
+.login__link {
+  transition: 0.2s all ease-out;
+}
+
+.login__link:hover {
+  opacity: 0.8;
   transition: 0.2s all ease-out;
 }

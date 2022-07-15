@@ -2,13 +2,21 @@ import React from "react";
 import "./Login.css";
 import "../Register/Register.css";
 import headerLogo from "../../images/logo.svg";
-import { renderTop, renderInput, renderBottom } from "../Register/Register";
+import { renderTop, renderInput, renderBottom } from "../SimpleForm/SimpleForm";
+import { useFormWithValidation } from "../../hooks/useForm";
+import { regex } from "../../utils/utils";
 
-export default function Login(onAbout, handleChange, onLogin, onRegister) {
+export default function Login({ onLogin }) {
+  const { values, errors, handleChange, isValid } = useFormWithValidation();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(values);
+  }
+
   const loginTop = {
     component: "login",
     headerLogo: headerLogo,
-    onAbout: onAbout,
     title: "Рады видеть!",
   };
 
@@ -19,8 +27,10 @@ export default function Login(onAbout, handleChange, onLogin, onRegister) {
     id: "email",
     name: "email",
     type: "email",
-    value: "pochta@yandex.ru",
+    value: values.email,
+    error: errors.email,
     handleChange: handleChange,
+    pattern: regex.email,
   };
 
   const passwordInput = {
@@ -30,8 +40,10 @@ export default function Login(onAbout, handleChange, onLogin, onRegister) {
     id: "password",
     name: "password",
     type: "password",
-    value: "verystrongpassword",
+    value: values.password,
+    error: errors.password,
     handleChange: handleChange,
+    minLength: 8,
   };
 
   const loginBottom = {
@@ -40,18 +52,18 @@ export default function Login(onAbout, handleChange, onLogin, onRegister) {
     action: "register",
     actionTitle: "Ещё не зарегистрированы?",
     actionButton: "Регистрация",
+    onClick: handleSubmit,
+    disabled: !isValid,
   };
 
   return (
     <section className="login">
-      <div className="login__section">
-        {renderTop(loginTop)}
-        <form className="login__form">
-          {renderInput(emailInput)}
-          {renderInput(passwordInput)}
-        </form>
-      </div>
-      {renderBottom(loginBottom)}
+      {renderTop(loginTop)}
+      <form className="login__form">
+        {renderInput(emailInput)}
+        {renderInput(passwordInput)}
+        {renderBottom(loginBottom)}
+      </form>
     </section>
   );
 }

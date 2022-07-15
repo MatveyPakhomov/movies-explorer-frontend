@@ -110,3 +110,30 @@
   opacity: 0.8;
   transition: 0.2s all ease-out;
 }
+
+.moviesCardList__section_error {
+  background-color: #fff;
+  max-width: 750px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #f3c1f8;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.21;
+  transition: 0.2s all ease-out;
+}
+
+@media screen and (max-width: 450px) {
+  .moviesCardList__section_error {
+    font-size: 20px;
+    line-height: 1.6;
+    transition: 0.2s all ease-out;
+  }
+}
+
